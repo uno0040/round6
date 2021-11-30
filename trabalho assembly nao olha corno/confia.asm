@@ -229,7 +229,7 @@ proc printOne;prints one gets x and y coordinates and color
     ret
 endp printOne
 
-proc printTwo;prints two gets x and y coordinates and color
+proc printTwo;prints two gets x and y coordinates and cor
     pop [ReturnAddress4]
     pop cx
     pop dx
