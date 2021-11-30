@@ -54,7 +54,7 @@ firstdigit dw 1
 decimal dw 0
 place dw 0
 CODESEG
-proc printpixel;gets place and color in that order via stack
+proc printpixel;gets place and color in that order via stack oi
     pop [ReturnAddress]
     mov bh,0h
     pop bx
