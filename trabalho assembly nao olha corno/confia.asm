@@ -6,27 +6,27 @@ STACK 100h
 
 DATASEG
 
-ReturnAddress dw 0
-ReturnAddress2 dw 0
-ReturnAddress3 dw 0
-ReturnAddress4 dw 0
-ReturnAddress5 dw 0
-ReturnAddress6 dw 0
-ReturnAddress7 dw 0
-ReturnAddress8 dw 0
-ReturnAddress9 dw 0
-ReturnAddress10 dw 0
-ReturnAddress11 dw 0
-ReturnAddress12 dw 0
-ReturnAddress13 dw 0
-ReturnAddress14 dw 0
-ReturnAddress15 dw 0
-ReturnAddress16 dw 0
-ReturnAddress17 dw 0
-ReturnAddress18 dw 0
+EnderecoDeRetorno dw 0
+EnderecoDeRetorno2 dw 0
+EnderecoDeRetorno3 dw 0
+EnderecoDeRetorno4 dw 0
+EnderecoDeRetorno5 dw 0
+EnderecoDeRetorno6 dw 0
+EnderecoDeRetorno7 dw 0
+EnderecoDeRetorno8 dw 0
+EnderecoDeRetorno9 dw 0
+EnderecoDeRetorno10 dw 0
+EnderecoDeRetorno11 dw 0
+EnderecoDeRetorno12 dw 0
+EnderecoDeRetorno13 dw 0
+EnderecoDeRetorno14 dw 0
+EnderecoDeRetorno15 dw 0
+EnderecoDeRetorno16 dw 0
+EnderecoDeRetorno17 dw 0
+EnderecoDeRetorno18 dw 0
 
 poppedin dw 0
-color dw 0
+cor dw 0
 
 saver dw 0
 saver1 dw 0
@@ -41,21 +41,21 @@ endx dw 0
 endy dw 0
 
 startx dw 0
-printthebuttons dw 0
-answer dw 0
-previousAnswer dw 0
-prevprevAnswer dw 0
-useprevprev dw 0
-plusbool dw 2
-minusbool dw 2
-multiplicationbool dw 2
-divisionbool dw 2
-firstdigit dw 1
+ImpressaoDeBotoes dw 0
+Saida dw 0
+UltimaSaida dw 0
+PreUltimaSaida dw 0
+UltimoUso dw 0
+BoleanoAdicao dw 2
+BoleanoSubracao dw 2
+BoleanoMultiplicacao dw 2
+BoleanoDivisao dw 2
+PrimeiroDigito dw 1
 decimal dw 0
-place dw 0
+casa dw 0
 CODESEG
-proc printpixel;gets place and color in that order via stack oi
-    pop [ReturnAddress]
+proc printpixel;gets casa and cor in that order via stack oi
+    pop [EnderecoDeRetorno]
     mov bh,0h
     pop bx
     mov cx,bx
@@ -66,19 +66,19 @@ proc printpixel;gets place and color in that order via stack oi
     mov bl,0
     mov ah,0ch
     int 10h
-    push [ReturnAddress]
+    push [EnderecoDeRetorno]
     ret
 endp printpixel
 
-proc printRow;gets index of row and color
-    pop[ReturnAddress2]
-    pop color
+proc printRow;gets index of row and cor
+    pop[EnderecoDeRetorno2]
+    pop cor
     mov cx,319
     printapixel:
     pop bx;has y coordinate of row
     push bx
     mov saver,cx
-    push color
+    push cor
     push bx
     push cx
     call printpixel
@@ -86,19 +86,19 @@ proc printRow;gets index of row and color
     dec cx
     cmp cx,0
     jne printapixel
-    push[ReturnAddress2]
+    push[EnderecoDeRetorno2]
     ret
 endp printRow
 
 proc printlinerow;gets start of line y coordinate and end of line
-    pop[ReturnAddress2]
-    pop color
+    pop[EnderecoDeRetorno2]
+    pop cor
     pop cx
     printapixel2:
     pop bx;has y coordinate of row
     push bx
     mov saver,cx
-    push color
+    push cor
     push bx
     push cx
     call printpixel
@@ -110,19 +110,19 @@ proc printlinerow;gets start of line y coordinate and end of line
     push bx
     cmp cx,dx
     jne printapixel2
-    push[ReturnAddress2]
+    push[EnderecoDeRetorno2]
     ret
 endp printlinerow
 
-proc printCollumn;gets index of collumn and color
-    pop[ReturnAddress2]
-    pop color
+proc printCollumn;gets index of collumn and cor
+    pop[EnderecoDeRetorno2]
+    pop cor
     mov cx,199
     printapixel3:
     pop bx;has x coordinate of collumn
 push bx
     mov saver,cx
-    push color
+    push cor
     push cx
     push bx
     call printpixel
@@ -130,19 +130,19 @@ push bx
     dec cx
     cmp cx,0
     jne printapixel3
-    push[ReturnAddress2]
+    push[EnderecoDeRetorno2]
     ret
 endp printCollumn
 
-proc printlinecollumn;gets start of line x coordinate and end of line and color
-    pop[ReturnAddress2]
-    pop color
+proc printlinecollumn;gets start of line x coordinate and end of line and cor
+    pop[EnderecoDeRetorno2]
+    pop cor
     pop cx
     printapixel4:
     pop bx;has x coordinate of row
     push bx
     mov saver,cx
-    push color
+    push cor
     push cx
     push bx
     call printpixel
@@ -154,13 +154,13 @@ proc printlinecollumn;gets start of line x coordinate and end of line and color
     push bx
     cmp cx,dx
     jne printapixel4
-    push[ReturnAddress2]
+    push[EnderecoDeRetorno2]
     ret
 endp printlinecollumn
 
-proc printRectangle;gets starting position(bottom right corner), width and length and color
-    pop [ReturnAddress3]
-    pop color
+proc printRectangle;gets starting position(bottom right corner), width and length and cor
+    pop [EnderecoDeRetorno3]
+    pop cor
     pop endx
     pop endy
     pop cx
@@ -171,7 +171,7 @@ proc printRectangle;gets starting position(bottom right corner), width and lengt
     push endx
     push bx
     push cx
-    push color
+    push cor
     call printlinerow
     mov cx,startx
     mov bx,saverofy
@@ -180,15 +180,15 @@ proc printRectangle;gets starting position(bottom right corner), width and lengt
     jne printRow2
 
 
-    push [ReturnAddress3]
+    push [EnderecoDeRetorno3]
     ret
 endp printRectangle
 
-proc printOne;prints one gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printOne;prints one gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1,cx
     mov saver2,dx
     sub cx, 6
@@ -199,7 +199,7 @@ proc printOne;prints one gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -211,7 +211,7 @@ proc printOne;prints one gets x and y coordinates and color
     sub dx, 15
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -223,17 +223,17 @@ proc printOne;prints one gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push [ReturnAddress4]
+    push [EnderecoDeRetorno4]
     ret
 endp printOne
 
 proc printTwo;prints two gets x and y coordinates and cor
-    pop [ReturnAddress4]
+    pop [EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
 mov saver2, dx
     sub cx,4
@@ -244,7 +244,7 @@ mov saver2, dx
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -256,7 +256,7 @@ mov saver2, dx
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -268,7 +268,7 @@ mov saver2, dx
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx,saver2
@@ -280,7 +280,7 @@ mov saver2, dx
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx,saver1
     mov dx,saver2
@@ -292,7 +292,7 @@ mov saver2, dx
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -304,7 +304,7 @@ mov saver2, dx
     sub dx,5
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -316,7 +316,7 @@ mov saver2, dx
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -328,17 +328,17 @@ mov saver2, dx
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push [ReturnAddress4]
+    push [EnderecoDeRetorno4]
     ret
 endp printTwo
 
-proc printThree;prints three to the screen gets x and y coordinates and color
-    pop [ReturnAddress4]
+proc printThree;prints three to the screen gets x and y coordinates and cor
+    pop [EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx,7
@@ -349,7 +349,7 @@ proc printThree;prints three to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -361,7 +361,7 @@ proc printThree;prints three to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
 call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -373,7 +373,7 @@ call printRectangle
     sub dx, 6
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -385,7 +385,7 @@ call printRectangle
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -397,7 +397,7 @@ call printRectangle
     sub dx, 6
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -409,7 +409,7 @@ call printRectangle
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -421,17 +421,17 @@ call printRectangle
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push [ReturnAddress4]
+    push [EnderecoDeRetorno4]
     ret
 endp printThree
 
-proc printFour;prints four to the screen get x and y coordinates and a color
-    pop [ReturnAddress4]
+proc printFour;prints four to the screen get x and y coordinates and a cor
+    pop [EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1,cx
     mov saver2,dx
     sub cx,6
@@ -442,7 +442,7 @@ proc printFour;prints four to the screen get x and y coordinates and a color
     sub dx, 18
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -454,7 +454,7 @@ proc printFour;prints four to the screen get x and y coordinates and a color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -466,7 +466,7 @@ proc printFour;prints four to the screen get x and y coordinates and a color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -478,7 +478,7 @@ proc printFour;prints four to the screen get x and y coordinates and a color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -490,7 +490,7 @@ proc printFour;prints four to the screen get x and y coordinates and a color
 sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -502,17 +502,17 @@ sub dx, 2
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push [ReturnAddress4]
+    push [EnderecoDeRetorno4]
     ret
 endp printFour
 
-proc printFive;prints five to the screen gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printFive;prints five to the screen gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1,cx
     mov saver2,dx
     sub cx, 5
@@ -523,7 +523,7 @@ proc printFive;prints five to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -535,7 +535,7 @@ proc printFive;prints five to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -547,7 +547,7 @@ proc printFive;prints five to the screen gets x and y coordinates and color
     sub dx, 6
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -559,7 +559,7 @@ proc printFive;prints five to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -571,7 +571,7 @@ proc printFive;prints five to the screen gets x and y coordinates and color
     sub dx, 8
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -583,17 +583,17 @@ proc printFive;prints five to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printFive
 
-proc printSix;prints six to the screen gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printSix;prints six to the screen gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2 ,dx
     sub cx, 5
@@ -604,7 +604,7 @@ proc printSix;prints six to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -616,7 +616,7 @@ sub cx, 3
     sub dx, 7
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -628,7 +628,7 @@ sub cx, 3
     sub dx, 12
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -640,7 +640,7 @@ sub cx, 3
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2 
@@ -652,7 +652,7 @@ sub cx, 3
     sub dx,2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -664,17 +664,17 @@ sub cx, 3
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printSix
 
-proc printSeven;prints seven to the screen gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printSeven;prints seven to the screen gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 13
@@ -685,7 +685,7 @@ proc printSeven;prints seven to the screen gets x and y coordinates and color
     sub dx, 3
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -697,7 +697,7 @@ proc printSeven;prints seven to the screen gets x and y coordinates and color
     sub dx, 3
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -709,7 +709,7 @@ proc printSeven;prints seven to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -721,7 +721,7 @@ proc printSeven;prints seven to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -733,7 +733,7 @@ proc printSeven;prints seven to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
 call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -745,7 +745,7 @@ call printRectangle
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -757,7 +757,7 @@ call printRectangle
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -769,17 +769,17 @@ call printRectangle
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printSeven
 
-proc printEight;prints eight to the screen gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printEight;prints eight to the screen gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 5
@@ -790,7 +790,7 @@ proc printEight;prints eight to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1 
     mov dx, saver2 
@@ -802,7 +802,7 @@ proc printEight;prints eight to the screen gets x and y coordinates and color
     sub dx, 3
     push dx 
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -814,7 +814,7 @@ proc printEight;prints eight to the screen gets x and y coordinates and color
     sub dx, 3
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -826,7 +826,7 @@ proc printEight;prints eight to the screen gets x and y coordinates and color
     sub dx, 3
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -838,7 +838,7 @@ proc printEight;prints eight to the screen gets x and y coordinates and color
     sub dx, 3
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -850,7 +850,7 @@ proc printEight;prints eight to the screen gets x and y coordinates and color
     sub dx, 3
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -862,7 +862,7 @@ sub cx, 2
     sub dx, 3
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -874,7 +874,7 @@ sub cx, 2
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -886,7 +886,7 @@ sub cx, 2
     sub dx, 4
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -898,7 +898,7 @@ sub cx, 2
     sub dx, 4
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -910,17 +910,17 @@ sub cx, 2
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printEight
 
-proc printNine;prints nine to the screen gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printNine;prints nine to the screen gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 5
@@ -931,7 +931,7 @@ proc printNine;prints nine to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -943,7 +943,7 @@ proc printNine;prints nine to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -955,7 +955,7 @@ proc printNine;prints nine to the screen gets x and y coordinates and color
     sub dx, 14
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -967,7 +967,7 @@ proc printNine;prints nine to the screen gets x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -979,7 +979,7 @@ proc printNine;prints nine to the screen gets x and y coordinates and color
     sub dx, 6
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
 mov dx, saver2
@@ -991,17 +991,17 @@ mov dx, saver2
     sub dx, 2
     push dx
     push cx 
-    push color 
+    push cor 
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printNine
 
-proc printPlusSign;prints plus sign to the screen get x and y coordinates and color
-    pop[ReturnAddress4]
+proc printPlusSign;prints plus sign to the screen get x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 6
@@ -1012,7 +1012,7 @@ proc printPlusSign;prints plus sign to the screen get x and y coordinates and co
     sub dx, 2
     push dx
     push cx 
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1024,7 +1024,7 @@ proc printPlusSign;prints plus sign to the screen get x and y coordinates and co
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1036,17 +1036,17 @@ proc printPlusSign;prints plus sign to the screen get x and y coordinates and co
     sub dx, 8
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printPlusSign
 
-proc printMinusSign;prints minus sign to the screen get x and y coordinates and color
-    pop[ReturnAddress4]
+proc printMinusSign;prints minus sign to the screen get x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     sub cx, 6
     sub dx, 9
     push dx
@@ -1055,17 +1055,17 @@ proc printMinusSign;prints minus sign to the screen get x and y coordinates and 
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printMinusSign
 
-proc printMultiplicationSign;prints multiplication sign to the screen gets x and y coortdinates and color
-    pop[ReturnAddress4]
+proc printMultiplicationSign;prints multiplication sign to the screen gets x and y coortdinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 5
@@ -1076,7 +1076,7 @@ proc printMultiplicationSign;prints multiplication sign to the screen gets x and
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1088,7 +1088,7 @@ proc printMultiplicationSign;prints multiplication sign to the screen gets x and
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1100,7 +1100,7 @@ proc printMultiplicationSign;prints multiplication sign to the screen gets x and
     sub dx, 2
 push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1112,7 +1112,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1124,7 +1124,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1136,7 +1136,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1148,7 +1148,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1160,7 +1160,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1172,7 +1172,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1184,7 +1184,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1196,7 +1196,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1208,7 +1208,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1220,7 +1220,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1232,7 +1232,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1244,7 +1244,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1256,7 +1256,7 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1268,17 +1268,17 @@ push dx
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printMultiplicationSign
 
-proc printDivisionSign;prints division sign to the screen gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printDivisionSign;prints division sign to the screen gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 9
@@ -1289,7 +1289,7 @@ proc printDivisionSign;prints division sign to the screen gets x and y coordinat
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1301,7 +1301,7 @@ proc printDivisionSign;prints division sign to the screen gets x and y coordinat
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1313,17 +1313,17 @@ proc printDivisionSign;prints division sign to the screen gets x and y coordinat
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printDivisionSign
 
-proc printEqualsSign;prints the equals sign to the screen gets x and y coordinates and color
-    pop[ReturnAddress4]
+proc printEqualsSign;prints the equals sign to the screen gets x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 6
@@ -1334,7 +1334,7 @@ proc printEqualsSign;prints the equals sign to the screen gets x and y coordinat
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1346,17 +1346,17 @@ proc printEqualsSign;prints the equals sign to the screen gets x and y coordinat
     sub dx, 2
     push dx
 push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printEqualsSign
 
-proc printZero;prints zero to the screen get x and y coordinates and color
-    pop[ReturnAddress4]
+proc printZero;prints zero to the screen get x and y coordinates and cor
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 5
@@ -1367,7 +1367,7 @@ proc printZero;prints zero to the screen get x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1379,7 +1379,7 @@ proc printZero;prints zero to the screen get x and y coordinates and color
     sub dx, 14
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1391,7 +1391,7 @@ proc printZero;prints zero to the screen get x and y coordinates and color
     sub dx, 14
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1403,19 +1403,19 @@ proc printZero;prints zero to the screen get x and y coordinates and color
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printZero
 
 proc printClear
-    pop[ReturnAddress4]
+    pop[EnderecoDeRetorno4]
     pop cx
     pop dx
-    pop color
+    pop cor
     mov saver1, cx
     mov saver2, dx
     sub cx, 6
@@ -1426,7 +1426,7 @@ proc printClear
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1438,7 +1438,7 @@ proc printClear
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1450,7 +1450,7 @@ proc printClear
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1462,7 +1462,7 @@ proc printClear
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1474,7 +1474,7 @@ sub cx, 2
     sub dx, 12
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1486,7 +1486,7 @@ sub cx, 2
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1498,7 +1498,7 @@ sub cx, 2
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1510,7 +1510,7 @@ sub cx, 2
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
     mov cx, saver1
     mov dx, saver2
@@ -1522,20 +1522,20 @@ sub cx, 2
     sub dx, 2
     push dx
     push cx
-    push color
+    push cor
     call printRectangle
-    push[ReturnAddress4]
+    push[EnderecoDeRetorno4]
     ret
 endp printClear
 
 proc printCalculator;prints the calculator
-    pop[ReturnAddress6]
+    pop[EnderecoDeRetorno6]
     ;prints base of calculator
     push 197 ;starty
     push 212 ;startx
     push 2 ;endy
     push 106 ;endx
-    push 20 ;color
+    push 20 ;cor
     call printRectangle
 
     ;prints screen of calculator
@@ -1550,19 +1550,19 @@ proc printCalculator;prints the calculator
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
     ;printing buttons
 
     call printButtons
 
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     ret
 endp printCalculator
 
 proc printButtons
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
 
     ;Clear button
     push 188
@@ -1575,9 +1575,9 @@ proc printButtons
     push 131 ;start x
     push 167 ;end y
     push 111 ;end x
-    push 25 ;color 
+    push 25 ;cor 
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 131 ;x coordinate
     call printClear
@@ -1593,9 +1593,9 @@ proc printButtons
 push 156 ;startx
     push 167 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 156 ;x coordinate
     call printZero
@@ -1611,9 +1611,9 @@ push 156 ;startx
     push 181 ;startx
     push 167 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 181 ;x coordinate
     call printEqualsSign
@@ -1629,9 +1629,9 @@ push 156 ;startx
     push 206 ;startx
     push 167 ;endy
     push 186 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 206 ;x coordinate
     call printDivisionSign
@@ -1647,9 +1647,9 @@ push 156 ;startx
     push 131 ;startx
     push 137 ;endy
     push 111 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 131 ;x coordinate
     call printOne
@@ -1665,9 +1665,9 @@ push 156 ;startx
     push 156 ;startx
     push 137 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 156 ;x coordinate
     call printTwo
@@ -1683,9 +1683,9 @@ push 156 ;startx
     push 181 ;startx
     push 137 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 181 ;x coordinate
     call printThree
@@ -1701,9 +1701,9 @@ push 156 ;startx
 push 206 ;startx
     push 137 ;endy
     push 186 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 206 ;x coordinate
     call printMultiplicationSign
@@ -1719,9 +1719,9 @@ push 206 ;startx
     push 131 ;startx
     push 107 ;endy
     push 111 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 131 ;x coordinate
     call printFour
@@ -1737,9 +1737,9 @@ push 206 ;startx
     push 156 ;startx
     push 107 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 156 ;x coordinate
     call printFive
@@ -1755,9 +1755,9 @@ push 206 ;startx
     push 181 ;startx
     push 107 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 181 ;x coordinate
     call printSix
@@ -1773,9 +1773,9 @@ push 206 ;startx
     push 206 ;startx
     push 107 ;endy
     push 186 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 206 ;x coordinate
     call printMinusSign
@@ -1791,9 +1791,9 @@ push 206 ;startx
     push 131 ;startx
     push 77 ;endy
     push 111 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 131 ;x coordinate
     call printSeven
@@ -1809,9 +1809,9 @@ push 206 ;startx
 push 156 ;startx
     push 77 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 156 ;x coordinate
     call printEight
@@ -1827,9 +1827,9 @@ push 156 ;startx
     push 181 ;startx
     push 77 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 181 ;x coordinate
     call printNine
@@ -1845,26 +1845,26 @@ push 156 ;startx
     push 206 ;startx
     push 77 ;endy
     push 186 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 206 ;x coordinate
     call printPlusSign
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp printButtons
 
 proc highlightClear
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
 
     push 187 ;start y
     push 131 ;start x
     push 167 ;end y
     push 111 ;end x
-    push 4 ;color 
+    push 4 ;cor 
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 131 ;x coordinate
     call printClear
@@ -1874,7 +1874,7 @@ proc highlightClear
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
     push 0
@@ -1882,11 +1882,11 @@ proc highlightClear
     push 207
     call printClear
 
-    mov answer, 0
-    mov previousAnswer, 0
-    mov place, 0
-    mov prevprevAnswer, 0
-    mov useprevprev, 0
+    mov Saida, 0
+    mov UltimaSaida, 0
+    mov casa, 0
+    mov PreUltimaSaida, 0
+    mov UltimoUso, 0
     mov ax, 0
 
     mov ah, 2ch
@@ -1904,7 +1904,7 @@ proc highlightClear
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
 
@@ -1912,25 +1912,25 @@ proc highlightClear
     push 131 ;start x
     push 167 ;end y
     push 111 ;end x
-    push 25 ;color 
+    push 25 ;cor 
     call printRectangle
-push 0 ;color
+push 0 ;cor
     push 187 ;y coordinate
     push 131 ;x coordinate
     call printClear
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightClear
 
 proc highlightOne
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 157 ;starty
     push 131 ;startx
     push 137 ;endy
     push 111 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 131 ;x coordinate
     call printOne
@@ -1940,63 +1940,63 @@ proc highlightOne
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
 
-    cmp firstDigit, 1
-    je isfirstDigit
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigito
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 1
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish
 
 
-    isfirstDigit:
+    isPrimeiroDigito:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints one to the screen
     push 0
     push 47
     push 207
     call printOne
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n1
     jmp allreadyoperated
     n1:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n2
     jmp allreadyoperated
     n2:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n3
     jmp allreadyoperated
     n3:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate
 
     allreadyoperated:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork
-    mov answer, 1
+    mov Saida, 1
     jmp finish
 
     dontwork:
-    mov previousAnswer, 1
+    mov UltimaSaida, 1
     jmp finish
 
 
@@ -2016,25 +2016,25 @@ proc highlightOne
     push 131 ;startx
     push 137 ;endy
     push 111 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 131 ;x coordinate
     call printOne
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightOne
 
 proc highlightTwo
-pop[ReturnAddress5]
+pop[EnderecoDeRetorno5]
     push 157 ;starty
     push 156 ;startx
     push 137 ;endy
     push 136 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 156 ;x coordinate
     call printTwo
@@ -2044,62 +2044,62 @@ pop[ReturnAddress5]
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    cmp firstDigit, 1
-    je isfirstDigitTwo
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoTwo
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 2
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish2
 
 
-    isfirstDigitTwo:
+    isPrimeiroDigitoTwo:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints two to the screen
     push 0
     push 47
     push 207
     call printTwo
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n21
     jmp allreadyoperated2
     n21:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n22
     jmp allreadyoperated2
     n22:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n23
     jmp allreadyoperated2
     n23:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate2
 
     allreadyoperated2:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate2:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork2
-    mov answer, 2
+    mov Saida, 2
     jmp finish2
 
     dontwork2:
-    mov previousAnswer, 2
+    mov UltimaSaida, 2
     jmp finish2
 
 
@@ -2119,25 +2119,25 @@ pop[ReturnAddress5]
     push 156 ;startx
     push 137 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 156 ;x coordinate
     call printTwo
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightTwo
 
 proc highlightThree
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 157 ;starty
     push 181 ;startx
     push 137 ;endy
     push 161 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-push 0 ;color
+push 0 ;cor
     push 157 ;y coordinate
     push 181 ;x coordinate
     call printThree
@@ -2147,63 +2147,63 @@ push 0 ;color
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
 
-    cmp firstDigit, 1
-    je isfirstDigitThree
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoThree
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 3
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish3
 
 
-    isfirstDigitThree:
+    isPrimeiroDigitoThree:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints three to the screen
     push 0
     push 47
     push 207
     call printThree
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n31
     jmp allreadyoperated3
     n31:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n32
     jmp allreadyoperated3
     n32:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n33
     jmp allreadyoperated3
     n33:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate3
 
     allreadyoperated3:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate3:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork3
-    mov answer, 3
+    mov Saida, 3
     jmp finish3
 
     dontwork3:
-    mov previousAnswer, 3
+    mov UltimaSaida, 3
     jmp finish3
 
 
@@ -2223,25 +2223,25 @@ push 0 ;color
     push 181 ;startx
     push 137 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 181 ;x coordinate
     call printThree
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightThree
 
 proc highlightFour
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 127 ;starty
     push 131 ;startx
     push 107 ;endy
     push 111 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 131 ;x coordinate
     call printFour
@@ -2251,63 +2251,63 @@ push 67 ;starty
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
 
-    cmp firstDigit, 1
-    je isfirstDigitFour
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoFour
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 4
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish4
 
 
-    isfirstDigitFour:
+    isPrimeiroDigitoFour:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints four to the screen
     push 0
     push 47
     push 207
     call printFour
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n41
     jmp allreadyoperated4
     n41:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n42
     jmp allreadyoperated4
     n42:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n43
     jmp allreadyoperated4
     n43:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate4
 
     allreadyoperated4:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate4:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork4
-    mov answer, 4
+    mov Saida, 4
     jmp finish4
 
     dontwork4:
-    mov previousAnswer, 4
+    mov UltimaSaida, 4
     jmp finish4
 
 
@@ -2327,25 +2327,25 @@ push 67 ;starty
     push 131 ;startx
     push 107 ;endy
     push 111 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 131 ;x coordinate
     call printFour
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightFour
 
 proc highlightFive
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 127 ;starty
     push 156 ;startx
     push 107 ;endy
     push 136 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 156 ;x coordinate
     call printFive
@@ -2355,61 +2355,61 @@ proc highlightFive
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
-cmp firstDigit, 1
-    je isfirstDigitFive
+cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoFive
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 5
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish5
 
 
-    isfirstDigitFive:
+    isPrimeiroDigitoFive:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints five to the screen
     push 0
     push 47
     push 207
     call printFive
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n51
     jmp allreadyoperated5
     n51:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n52
     jmp allreadyoperated5
     n52:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n53
     jmp allreadyoperated5
     n53:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate5
 
     allreadyoperated5:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate5:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork5
-    mov answer, 5
+    mov Saida, 5
     jmp finish5
 
     dontwork5:
-    mov previousAnswer, 5
+    mov UltimaSaida, 5
     jmp finish5
 
 
@@ -2429,25 +2429,25 @@ cmp firstDigit, 1
     push 156 ;startx
     push 107 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 156 ;x coordinate
     call printFive
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightFive
 
 proc highlightSix
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 127 ;starty
     push 181 ;startx
     push 107 ;endy
     push 161 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 181 ;x coordinate
     call printSix
@@ -2457,63 +2457,63 @@ proc highlightSix
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
 
-    cmp firstDigit, 1
-    je isfirstDigitSix
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoSix
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
 add ax, 6
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish6
 
 
-    isfirstDigitSix:
+    isPrimeiroDigitoSix:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints six to the screen
     push 0
     push 47
     push 207
     call printSix
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n61
     jmp allreadyoperated6
     n61:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n62
     jmp allreadyoperated6
     n62:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n63
     jmp allreadyoperated6
     n63:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate6
 
     allreadyoperated6:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate6:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork6
-    mov answer, 6
+    mov Saida, 6
     jmp finish6
 
     dontwork6:
-    mov previousAnswer, 6
+    mov UltimaSaida, 6
     jmp finish6
 
 
@@ -2533,25 +2533,25 @@ add ax, 6
     push 181 ;startx
     push 107 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 181 ;x coordinate
     call printSix
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightSix
 
 proc highlightSeven
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 97 ;starty
     push 131 ;startx
     push 77 ;endy
     push 111 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 131 ;x coordinate
     call printSeven
@@ -2561,62 +2561,62 @@ proc highlightSeven
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
 
-    cmp firstDigit, 1
-    je isfirstDigitSeven
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoSeven
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 7
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish7
 
 
-    isfirstDigitSeven:
-mov firstDigit, 0
+    isPrimeiroDigitoSeven:
+mov PrimeiroDigito, 0
     ;prints seven to the screen
     push 0
     push 47
     push 207
     call printSeven
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n71
     jmp allreadyoperated7
     n71:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n72
     jmp allreadyoperated7
     n72:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n73
     jmp allreadyoperated7
     n73:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate7
 
     allreadyoperated7:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate7:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork7
-    mov answer, 7
+    mov Saida, 7
     jmp finish7
 
     dontwork7:
-    mov previousAnswer, 7
+    mov UltimaSaida, 7
     jmp finish7
 
 
@@ -2636,25 +2636,25 @@ mov firstDigit, 0
     push 131 ;startx
     push 77 ;endy
     push 111 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 131 ;x coordinate
     call printSeven
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightSeven
 
 proc highlightEight
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 97 ;starty
     push 156 ;startx
     push 77 ;endy
     push 136 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 156 ;x coordinate
     call printEight
@@ -2664,63 +2664,63 @@ proc highlightEight
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
 
-    cmp firstDigit, 1
-    je isfirstDigitEight
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoEight
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 8
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish8
 
 
-    isfirstDigitEight:
+    isPrimeiroDigitoEight:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints eight to the screen
     push 0
     push 47
     push 207
     call printEight
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
 jne n81
     jmp allreadyoperated8
     n81:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n82
     jmp allreadyoperated8
     n82:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n83
     jmp allreadyoperated8
     n83:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate8
 
     allreadyoperated8:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate8:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork8
-    mov answer, 8
+    mov Saida, 8
     jmp finish8
 
     dontwork8:
-    mov previousAnswer, 8
+    mov UltimaSaida, 8
     jmp finish8
 
 
@@ -2740,25 +2740,25 @@ jne n81
     push 156 ;startx
     push 77 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 156 ;x coordinate
     call printEight
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightEight
 
 proc highlightNine
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 97 ;starty
     push 181 ;startx
     push 77 ;endy
     push 161 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 181 ;x coordinate
     call printNine
@@ -2768,62 +2768,62 @@ proc highlightNine
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    cmp firstDigit, 1
-    je isfirstDigitNine
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoNine
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 9
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish
 
 
-    isfirstDigitNine:
+    isPrimeiroDigitoNine:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints nine to the screen
     push 0
     push 47
     push 207
     call printNine
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n91
     jmp allreadyoperated9
     n91:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n92
     jmp allreadyoperated9
     n92:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n93
 jmp allreadyoperated9
     n93:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate9
 
     allreadyoperated9:
-    mov ax, previousAnswer
-    mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+    mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate9:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork9
-    mov answer, 9
+    mov Saida, 9
     jmp finish9
 
     dontwork9:
-    mov previousAnswer, 9
+    mov UltimaSaida, 9
     jmp finish9
 
 
@@ -2843,25 +2843,25 @@ jmp allreadyoperated9
     push 181 ;startx
     push 77 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 181 ;x coordinate
     call printNine
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightNine
 
 proc highlightZero
-    pop[ReturnAddress5]
+    pop[EnderecoDeRetorno5]
     push 187 ;starty
     push 156 ;startx
     push 167 ;endy
     push 136 ;endx
-    push 4 ;color
+    push 4 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 156 ;x coordinate
     call printZero
@@ -2871,62 +2871,62 @@ proc highlightZero
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    cmp firstDigit, 1
-    je isfirstDigitZero
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigitoZero
 
     xor dx,dx
-    mov ax, previousAnswer
-    add ax, answer
+    mov ax, UltimaSaida
+    add ax, Saida
     mov bx, 0ah
     mul bx
     add ax, 0
-    mov answer, 0
-    mov previousAnswer, ax
+    mov Saida, 0
+    mov UltimaSaida, ax
     call printAccordingly
     jmp finish0
 
 
-    isfirstDigitZero:
+    isPrimeiroDigitoZero:
 
-    mov firstDigit, 0
+    mov PrimeiroDigito, 0
     ;prints zero to the screen
     push 0
     push 47
     push 207
     call printZero
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne n01
     jmp allreadyoperated0
     n01:
-    cmp minusbool,1
+    cmp BoleanoSubracao,1
     jne n02
     jmp allreadyoperated0
     n02:
-    cmp multiplicationbool,1
+    cmp BoleanoMultiplicacao,1
     jne n03
     jmp allreadyoperated0
     n03:
-    cmp divisionbool,1
+    cmp BoleanoDivisao,1
     jne didntoperate0
 
     allreadyoperated0:
-    mov ax, previousAnswer
-mov prevprevAnswer, ax
-    mov useprevprev, 1
-    mov previousAnswer, 0
+    mov ax, UltimaSaida
+mov PreUltimaSaida, ax
+    mov UltimoUso, 1
+    mov UltimaSaida, 0
 
     didntoperate0:
-    cmp previousAnswer, 0
+    cmp UltimaSaida, 0
     je dontwork0
-    mov answer, 0
+    mov Saida, 0
     jmp finish0
 
     dontwork0:
-    mov previousAnswer, 0
+    mov UltimaSaida, 0
     jmp finish0
 
 
@@ -2946,25 +2946,25 @@ mov prevprevAnswer, ax
     push 156 ;startx
     push 167 ;endy
     push 136 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 156 ;x coordinate
     call printZero
-    push[ReturnAddress5]
+    push[EnderecoDeRetorno5]
     ret
 endp highlightZero
 
 proc highlightEqualsSign
-    pop[ReturnAddress8]
+    pop[EnderecoDeRetorno8]
     push 187 ;starty
     push 181 ;startx
     push 167 ;endy
     push 161 ;endx
-    push 3 ;color
+    push 3 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 181 ;x coordinate
     call printEqualsSign
@@ -2974,58 +2974,58 @@ proc highlightEqualsSign
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    mov firstDigit, 1
+    mov PrimeiroDigito, 1
 
-    cmp useprevprev, 1
+    cmp UltimoUso, 1
     je checkdivide
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne checkminus
-    mov plusbool, 0
-    mov ax, answer
-    add ax, previousAnswer
+    mov boleanoAdicao, 0
+    mov ax, Saida
+    add ax, UltimaSaida
     call printAccordingly
     jmp clockWork
 
     checkminus:
-    cmp minusbool, 1
+    cmp BoleanoSubracao, 1
     jne ceckmultiply
-    mov minusbool, 0
-    mov ax, previousAnswer
-    sub ax, answer
+    mov BoleanoSubracao, 0
+    mov ax, UltimaSaida
+    sub ax, Saida
     call printAccordingly
     jmp clockWork
 
     ceckmultiply:
-    cmp multiplicationbool, 1
+    cmp BoleanoMultiplicacao, 1
     jne checkdivide
-    mov multiplicationbool, 0
-    mov ax, answer
+    mov BoleanoMultiplicacao, 0
+    mov ax, Saida
     xor dx,dx
-    mul previousAnswer
+    mul UltimaSaida
     mov saver4, ax
     call printAccordingly
     mov ax, saver4
-    mov answer, 0
+    mov Saida, 0
     jmp clockWork
 
     checkdivide:
-    cmp useprevprev, 1
-    je usingprevprev
-    cmp divisionbool, 1
+    cmp UltimoUso, 1
+    je usingPreUltima
+    cmp BoleanoDivisao, 1
     jne    printRegular
-    mov divisionbool, 0
-    mov ax, previousAnswer
+    mov BoleanoDivisao, 0
+    mov ax, UltimaSaida
     xor dx, dx
-mov bx, answer
+mov bx, Saida
     div bx
     mov saver4, ax
     call printAccordingly
     mov ax, saver4
-    mov answer, 0
+    mov Saida, 0
     jmp clockWork
 
     printRegular:
@@ -3034,51 +3034,51 @@ mov bx, answer
 
 
 
-    usingprevprev:
+    usingPreUltima:
 
-    cmp plusbool,1
+    cmp boleanoAdicao,1
     jne checkminus2
-    mov plusbool, 0
-    mov ax, previousAnswer
-    add ax, prevprevAnswer
+    mov boleanoAdicao, 0
+    mov ax, UltimaSaida
+    add ax, PreUltimaSaida
     call printAccordingly
     jmp clockWork
 
     checkminus2:
-    cmp minusbool, 1
+    cmp BoleanoSubracao, 1
     jne ceckmultiply2
-    mov minusbool, 0
-    mov ax, prevprevAnswer
-    sub ax, previousAnswer
+    mov BoleanoSubracao, 0
+    mov ax, PreUltimaSaida
+    sub ax, UltimaSaida
     call printAccordingly
     jmp clockWork
 
     ceckmultiply2:
-    cmp multiplicationbool, 1
+    cmp BoleanoMultiplicacao, 1
     jne checkdivide2
-    mov multiplicationbool, 0
-    mov ax, previousAnswer
+    mov BoleanoMultiplicacao, 0
+    mov ax, UltimaSaida
     xor dx,dx
-    mov bx, prevprevAnswer
+    mov bx, PreUltimaSaida
     mul bx
     mov saver4, ax
     call printAccordingly
     mov ax, saver4
-    mov previousAnswer, 0
+    mov UltimaSaida, 0
     jmp clockWork
 
     checkdivide2:
-    cmp divisionbool, 1
+    cmp BoleanoDivisao, 1
     jne    printRegular2
-    mov divisionbool, 0
-    mov ax, prevprevAnswer
+    mov BoleanoDivisao, 0
+    mov ax, PreUltimaSaida
     xor dx, dx
-    mov bx, previousAnswer
+    mov bx, UltimaSaida
     div bx
     mov saver4, ax
     call printAccordingly
     mov ax, saver4
-    mov previousAnswer, 0
+    mov UltimaSaida, 0
     jmp clockWork
 
     printRegular2:
@@ -3101,25 +3101,25 @@ mov bx, answer
     push 181 ;startx
     push 167 ;endy
     push 161 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 181 ;x coordinate
     call printEqualsSign
-    push[ReturnAddress8]
+    push[EnderecoDeRetorno8]
     ret
 endp highlightEqualsSign
 
 proc highlightDivisionSign
-    pop[ReturnAddress8]
+    pop[EnderecoDeRetorno8]
     push 187 ;starty
     push 206 ;startx
     push 167 ;endy
     push 186 ;endx
-    push 3 ;color
+    push 3 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 206 ;x coordinate
     call printDivisionSign
@@ -3128,25 +3128,25 @@ proc highlightDivisionSign
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    cmp answer , 0
+    cmp Saida , 0
     je clockWork3
-    mov ax, answer
-    div previousAnswer
+    mov ax, Saida
+    div UltimaSaida
     mov saver4, ax
     call printAccordingly
-    mov divisionbool, 1
+    mov BoleanoDivisao, 1
     mov ax, saver4
-    mov previousAnswer, ax
-    mov answer, 1
+    mov UltimaSaida, ax
+    mov Saida, 1
 
     clockWork3:
-    mov firstDigit, 1
-    mov ax, previousAnswer
+    mov PrimeiroDigito, 1
+    mov ax, UltimaSaida
     call printAccordingly
-    mov divisionbool, 1
+    mov BoleanoDivisao, 1
     mov ah, 2ch
     int 21h
     mov saver1, dx
@@ -3161,25 +3161,25 @@ proc highlightDivisionSign
     push 206 ;startx
     push 167 ;endy
     push 186 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 187 ;y coordinate
     push 206 ;x coordinate
     call printDivisionSign
-    push[ReturnAddress8]
+    push[EnderecoDeRetorno8]
     ret
 endp highlightDivisionSign
 
 proc highlightMultiplicationSign
-    pop[ReturnAddress8]
+    pop[EnderecoDeRetorno8]
     push 157 ;starty
     push 206 ;startx
     push 137 ;endy
     push 186 ;endx
-    push 3 ;color
+    push 3 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 206 ;x coordinate
     call printMultiplicationSign
@@ -3189,25 +3189,25 @@ proc highlightMultiplicationSign
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    cmp answer, 0
+    cmp Saida, 0
     je clockWork2
-    mov ax, answer
-    mul previousAnswer
+    mov ax, Saida
+    mul UltimaSaida
     mov saver4, ax
     call printAccordingly
     mov ax, saver4
-    mov previousAnswer, ax
-    mov multiplicationbool, 1
-    mov answer, 1
+    mov UltimaSaida, ax
+    mov BoleanoMultiplicacao, 1
+    mov Saida, 1
 
     clockWork2:
-    mov firstDigit, 1
-    mov ax, previousAnswer
+    mov PrimeiroDigito, 1
+    mov ax, UltimaSaida
     call printAccordingly
-    mov multiplicationbool, 1
+    mov BoleanoMultiplicacao, 1
     mov ah, 2ch
     int 21h
     mov saver1, dx
@@ -3222,25 +3222,25 @@ proc highlightMultiplicationSign
     push 206 ;startx
     push 137 ;endy
     push 186 ;endx
-push 25 ;color
+push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 157 ;y coordinate
     push 206 ;x coordinate
     call printMultiplicationSign
-    push[ReturnAddress8]
+    push[EnderecoDeRetorno8]
     ret
 endp highlightMultiplicationSign
 
 proc highlightMinusSign
-    pop[ReturnAddress8]
+    pop[EnderecoDeRetorno8]
     push 127 ;starty
     push 206 ;startx
     push 107 ;endy
     push 186 ;endx
-    push 3 ;color
+    push 3 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 206 ;x coordinate
     call printMinusSign
@@ -3250,19 +3250,19 @@ proc highlightMinusSign
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    mov firstDigit, 1
-    mov ax, previousAnswer
-    sub ax, answer
+    mov PrimeiroDigito, 1
+    mov ax, UltimaSaida
+    sub ax, Saida
     mov saver4, ax
     call printAccordingly
-    mov minusbool ,1
-    mov answer, 0
+    mov BoleanoSubracao ,1
+    mov Saida, 0
     mov ax, saver4
-    mov previousAnswer ,ax
-    mov firstDigit, 1
+    mov UltimaSaida ,ax
+    mov PrimeiroDigito, 1
 
 
     mov ah, 2ch
@@ -3279,25 +3279,25 @@ proc highlightMinusSign
     push 206 ;startx
     push 107 ;endy
     push 186 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 127 ;y coordinate
     push 206 ;x coordinate
     call printMinusSign
-    push[ReturnAddress8]
+    push[EnderecoDeRetorno8]
     ret
 endp highlightMinusSign
 
 proc highlightPlusSign
-    pop[ReturnAddress8]
+    pop[EnderecoDeRetorno8]
     push 97 ;starty
     push 206 ;startx
     push 77 ;endy
     push 186 ;endx
-    push 3 ;color
+    push 3 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 206 ;x coordinate
     call printPlusSign
@@ -3307,26 +3307,26 @@ proc highlightPlusSign
     push 207 ;startx
     push 7 ;endy
     push 111 ;endx
-    push 15 ;color
+    push 15 ;cor
     call printRectangle
 
-    cmp firstDigit, 1
-    je isfirstDigit2
+    cmp PrimeiroDigito, 1
+    je isPrimeiroDigito2
 
-    mov firstDigit, 1
+    mov PrimeiroDigito, 1
 
 
-    isfirstDigit2:
+    isPrimeiroDigito2:
     xor ax,ax
-    mov ax, answer
-    add ax, previousAnswer
+    mov ax, Saida
+    add ax, UltimaSaida
     mov saver4, ax
     call printAccordingly
-    mov plusbool, 1
-mov answer, 0
+    mov boleanoAdicao, 1
+mov Saida, 0
     mov ax, saver4
-    mov previousAnswer ,ax
-    mov firstDigit, 1
+    mov UltimaSaida ,ax
+    mov PrimeiroDigito, 1
 
     mov ah, 2ch
     int 21h
@@ -3342,13 +3342,13 @@ mov answer, 0
     push 206 ;startx
     push 77 ;endy
     push 186 ;endx
-    push 25 ;color
+    push 25 ;cor
     call printRectangle
-    push 0 ;color
+    push 0 ;cor
     push 97 ;y coordinate
     push 206 ;x coordinate
     call printPlusSign
-    push[ReturnAddress8]
+    push[EnderecoDeRetorno8]
     ret
 endp highlightPlusSign
 
@@ -3360,11 +3360,11 @@ proc printAccordingly;prints the value that is in ax to the screen of the calcul
     jmp bigger
 
     smaller:
-    pop[ReturnAddress6]
+    pop[EnderecoDeRetorno6]
     cmp ax, 0
     jne next
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3374,13 +3374,13 @@ proc printAccordingly;prints the value that is in ax to the screen of the calcul
     push 47
     push ax
     call printZero
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next:
     cmp ax, 1
     jne next2
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3391,13 +3391,13 @@ proc printAccordingly;prints the value that is in ax to the screen of the calcul
     push ax 
     mov ax, saver
     call printOne
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next2:
     cmp ax, 2
     jne next3
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3408,13 +3408,13 @@ proc printAccordingly;prints the value that is in ax to the screen of the calcul
     push ax
     mov ax, saver
     call printTwo
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next3:
     cmp ax, 3
     jne next4
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3425,13 +3425,13 @@ proc printAccordingly;prints the value that is in ax to the screen of the calcul
     push ax
     mov ax, saver
     call printThree
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next4:
     cmp ax, 4
     jne    next5
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3442,13 +3442,13 @@ proc printAccordingly;prints the value that is in ax to the screen of the calcul
     push ax
     mov ax, saver
     call printFour
-push[ReturnAddress6]
+push[EnderecoDeRetorno6]
     jmp jumper
     next5:
     cmp ax, 5
     jne    next6
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3459,13 +3459,13 @@ push[ReturnAddress6]
     push ax
     mov ax, saver
     call printFive
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next6:
     cmp ax, 6
     jne next7
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3476,13 +3476,13 @@ push[ReturnAddress6]
     push ax
     mov ax, saver
     call printSix
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next7:
     cmp ax, 7
     jne    next8
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3493,13 +3493,13 @@ push[ReturnAddress6]
     push ax
     mov ax, saver
     call printSeven
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next8:
     cmp ax, 8
     jne    next9
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3510,13 +3510,13 @@ push[ReturnAddress6]
     push ax 
     mov ax, saver
     call printEight
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
     next9:
     cmp ax, 9
     jne jumper
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3527,7 +3527,7 @@ push[ReturnAddress6]
     push ax 
     mov ax, saver
     call printNine
-    push[ReturnAddress6]
+    push[EnderecoDeRetorno6]
     jmp jumper
 
     bigger:
@@ -3538,12 +3538,12 @@ push[ReturnAddress6]
     jmp endofproc
 
     notevenbigger:
-        pop[ReturnAddress10]
+        pop[EnderecoDeRetorno10]
         cmp ax, 0ah
         jne next10
         mov saver4, ax
         mov ax, 0
-        mov place, 0 
+        mov casa, 0 
         call printAccordingly2
         next10:
 
@@ -3551,7 +3551,7 @@ push[ReturnAddress6]
         jne next11
         mov saver4, ax
         mov ax, 1
-        mov place, 0
+        mov casa, 0
         call printAccordingly2
         next11:
 
@@ -3559,7 +3559,7 @@ push[ReturnAddress6]
         jne next12
         mov saver4, ax
         mov ax, 2
-        mov place, 0
+        mov casa, 0
 call printAccordingly2
         next12:
 
@@ -3567,7 +3567,7 @@ call printAccordingly2
         jne next13
         mov saver4, ax
         mov ax, 3
-        mov place, 0
+        mov casa, 0
         call printAccordingly2
         next13:
 
@@ -3575,7 +3575,7 @@ call printAccordingly2
         jne next14
         mov saver4, ax
         mov ax, 4
-        mov place, 0
+        mov casa, 0
         call printAccordingly2
         next14:
 
@@ -3583,32 +3583,32 @@ call printAccordingly2
         jne next15
         mov saver4, ax
         mov ax, 5
-        mov place, 0
+        mov casa, 0
         call printAccordingly2
         next15:
 
 
         mov ax, 1
-        inc place
+        inc casa
         call printAccordingly2
-        dec place
+        dec casa
         mov ax, saver4
-        push[ReturnAddress10]
+        push[EnderecoDeRetorno10]
         jmp endofproc
 
     evenbigger:
-        mov place, 0
+        mov casa, 0
         xor dx,dx
         mov bx, 0ah
         div bx
         mov saver5, ax
         mov ax, dx
-        pop[ReturnAddress11]
+        pop[EnderecoDeRetorno11]
         call printAccordingly2
-        inc place
+        inc casa
         mov ax, saver5
         call printAccordingly2
-        push[ReturnAddress11]
+        push[EnderecoDeRetorno11]
 
 
     endofproc:
@@ -3626,11 +3626,11 @@ proc printAccordingly2
     jmp bigger2
 
     smaller2:
-    pop[ReturnAddress12]
+    pop[EnderecoDeRetorno12]
     cmp ax, 0
     jne nextt
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3640,13 +3640,13 @@ proc printAccordingly2
     push 47
     push ax
     call printZero
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
     nextt:
     cmp ax, 1
     jne nextt2
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3657,13 +3657,13 @@ proc printAccordingly2
     push ax 
     mov ax, saver
     call printOne
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
     nextt2:
     cmp ax, 2
     jne nextt3
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3674,13 +3674,13 @@ proc printAccordingly2
     push ax
     mov ax, saver
     call printTwo
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
 nextt3:
     cmp ax, 3
     jne nextt4
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3691,13 +3691,13 @@ nextt3:
     push ax
     mov ax, saver
     call printThree
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
     nextt4:
     cmp ax, 4
     jne    nextt5
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3708,13 +3708,13 @@ nextt3:
     push ax
     mov ax, saver
     call printFour
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
     nextt5:
     cmp ax, 5
     jne    nextt6
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3725,13 +3725,13 @@ nextt3:
     push ax
     mov ax, saver
     call printFive
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
     nextt6:
     cmp ax, 6
     jne nextt7
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3742,13 +3742,13 @@ nextt3:
     push ax
     mov ax, saver
     call printSix
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
     nextt7:
     cmp ax, 7
     jne    nextt8
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3759,13 +3759,13 @@ nextt3:
     push ax
     mov ax, saver
     call printSeven
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp endofproc2
     nextt8:
     cmp ax, 8
     jne    nextt9
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3776,13 +3776,13 @@ nextt3:
     push ax 
     mov ax, saver
     call printEight
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jmp jumpingtoend
     nextt9:
     cmp ax, 9
     jne    jumpingtoend
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3793,7 +3793,7 @@ nextt3:
     push ax 
     mov ax, saver
     call printNine
-    push[ReturnAddress12]
+    push[EnderecoDeRetorno12]
     jumpingtoend:
     jmp endofproc2
 
@@ -3803,7 +3803,7 @@ jle notevenbigger2
     jmp evenbigger2
 
     notevenbigger2:
-        pop[ReturnAddress13]
+        pop[EnderecoDeRetorno13]
         cmp ax, 0ah
         jne nextt10
         mov saver4, ax
@@ -3848,26 +3848,26 @@ jle notevenbigger2
 
 
         mov ax, 1
-        inc place
+        inc casa
         call printAccordingly3
-        dec place
+        dec casa
         mov ax, saver4
-        push[ReturnAddress13]
+        push[EnderecoDeRetorno13]
         jmp endofproc2
 
     evenbigger2:
-        ;mov place, 0
+        ;mov casa, 0
         xor dx,dx
         mov bx, 0ah
         div bx
         mov saver5, ax
         mov ax, dx
-        pop[ReturnAddress14]
+        pop[EnderecoDeRetorno14]
         call printAccordingly3
         mov ax, saver5
-        inc place
+        inc casa
         call printAccordingly3
-        push[ReturnAddress14]
+        push[EnderecoDeRetorno14]
 
 
     endofproc2:
@@ -3881,11 +3881,11 @@ proc printAccordingly3
     jmp bigger3
 
     smaller3:
-    pop[ReturnAddress16]
+    pop[EnderecoDeRetorno16]
     cmp ax, 0
     jne nexttt
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3895,13 +3895,13 @@ proc printAccordingly3
     push 47
     push ax
     call printZero
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt:
     cmp ax, 1
     jne nexttt2
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3912,13 +3912,13 @@ sub ax, bx
     push ax 
     mov ax, saver
     call printOne
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt2:
     cmp ax, 2
     jne nexttt3
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3929,13 +3929,13 @@ sub ax, bx
     push ax
     mov ax, saver
     call printTwo
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt3:
     cmp ax, 3
     jne nexttt4
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3946,13 +3946,13 @@ sub ax, bx
     push ax
     mov ax, saver
     call printThree
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt4:
     cmp ax, 4
     jne    nexttt5
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3963,13 +3963,13 @@ sub ax, bx
     push ax
     mov ax, saver
     call printFour
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt5:
     cmp ax, 5
     jne    nexttt6
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3980,13 +3980,13 @@ sub ax, bx
     push ax
     mov ax, saver
     call printFive
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt6:
     cmp ax, 6
     jne nexttt7
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -3997,13 +3997,13 @@ sub ax, bx
     push ax
     mov ax, saver
     call printSix
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt7:
     cmp ax, 7
     jne    nexttt8
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -4014,13 +4014,13 @@ sub ax, bx
     push ax
     mov ax, saver
     call printSeven
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp endofproc3
     nexttt8:
     cmp ax, 8
     jne    nexttt9
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -4031,13 +4031,13 @@ sub ax, bx
     push ax
 mov ax, saver
     call printEight
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jmp jumpingtoend2
     nexttt9:
     cmp ax, 9
     jne    jumpingtoend2
     mov saver, ax
-    mov ax, place
+    mov ax, casa
     mov bx, 20
     mul bx
     mov bx, ax
@@ -4048,7 +4048,7 @@ mov ax, saver
     push ax 
     mov ax, saver
     call printNine
-    push[ReturnAddress16]
+    push[EnderecoDeRetorno16]
     jumpingtoend2:
     jmp endofproc3
 
@@ -4058,7 +4058,7 @@ mov ax, saver
     jmp evenbigger3
 
     notevenbigger3:
-        pop[ReturnAddress17]
+        pop[EnderecoDeRetorno17]
         cmp ax, 0ah
         jne nexttt10
         mov saver4, ax
@@ -4103,26 +4103,26 @@ mov ax, saver
 
 
         mov ax, 1
-        inc place
+        inc casa
         call printAccordingly3
-        dec place
+        dec casa
         mov ax, saver4
-        push[ReturnAddress17]
+        push[EnderecoDeRetorno17]
         jmp endofproc3
 
     evenbigger3:
-        mov place, 0
+        mov casa, 0
         xor dx,dx
         mov bx, 0ah
         div bx
         mov saver5, ax
         mov ax, dx
-        pop[ReturnAddress18]
+        pop[EnderecoDeRetorno18]
         call printAccordingly3
         mov ax, saver5
-        inc place
+        inc casa
         call printAccordingly3
-        push[ReturnAddress18]
+        push[EnderecoDeRetorno18]
 
 
     endofproc3:
@@ -4152,9 +4152,9 @@ start:
 
     Update:
 
-    cmp printthebuttons, 1
+    cmp ImpressaoDeBotoes, 1
     jne dontprint
-    mov printthebuttons, 0
+    mov ImpressaoDeBotoes, 0
     call printButtons
     dontprint:
 
@@ -4178,7 +4178,7 @@ start:
     jl skipit
     cmp dx, 187
     jg skipit
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightClear
     skipit:
 
@@ -4202,7 +4202,7 @@ start:
     jl skip
     cmp dx, 157
     jg skip
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightOne
     skip:
 
@@ -4226,7 +4226,7 @@ start:
     jl skip2
     cmp dx, 157
     jg skip2
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightTwo
     skip2:
 
@@ -4250,7 +4250,7 @@ start:
     jl skip3
     cmp dx, 157
     jg skip3
-mov printthebuttons, 1
+mov ImpressaoDeBotoes, 1
     call highlightThree
     skip3:
 
@@ -4274,7 +4274,7 @@ mov printthebuttons, 1
     jl skip4
     cmp dx, 127
     jg skip4
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightFour
     skip4:
 
@@ -4298,7 +4298,7 @@ mov printthebuttons, 1
     jl skip5
     cmp dx, 127
     jg skip5
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightFive
     skip5:
 
@@ -4322,7 +4322,7 @@ mov printthebuttons, 1
     jl skip6
     cmp dx, 127
     jg skip6
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightSix
     skip6:
 
@@ -4346,7 +4346,7 @@ mov printthebuttons, 1
     jl skip7
     cmp dx, 97
     jg skip7
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightSeven
     skip7:
 
@@ -4370,7 +4370,7 @@ mov printthebuttons, 1
     jl skip8
     cmp dx, 97
     jg skip8
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightEight
     skip8:
 
@@ -4394,7 +4394,7 @@ jne skip9
     jl skip9
     cmp dx, 97
     jg skip9
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightNine
     skip9:
 
@@ -4418,7 +4418,7 @@ jne skip9
     jl skip10
     cmp dx, 187
     jg skip10
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightZero
     skip10:
 
@@ -4442,7 +4442,7 @@ jne skip9
     jl skip11
     cmp dx, 187
     jg skip11
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightEqualsSign
     skip11:
 
@@ -4466,7 +4466,7 @@ jne skip9
     jl skip12
     cmp dx, 187
     jg skip12
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightDivisionSign
     skip12:
 
@@ -4490,7 +4490,7 @@ jne skip9
     jl skip13
     cmp dx, 157
     jg skip13
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightMultiplicationSign
     skip13:
 
@@ -4514,7 +4514,7 @@ cmp ax, 206
     jl skip14
     cmp dx, 127
     jg skip14
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightMinusSign
     skip14:
 
@@ -4538,7 +4538,7 @@ cmp ax, 206
     jl skip15
     cmp dx, 97
     jg skip15
-    mov printthebuttons, 1
+    mov ImpressaoDeBotoes, 1
     call highlightPlusSign
     skip15:
 
