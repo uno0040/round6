@@ -4544,11 +4544,11 @@ cmp ax, 206
 
     jmp Update
 
-    ;Wait for key press
+    ;Aguarda pressionamento da tecla do teclado
     mov ah,00h
     int 16h
 
-    ;Return to text mode
+    ;Volta ao modo texto
     mov ah,0
     mov al,2
     int 10h
