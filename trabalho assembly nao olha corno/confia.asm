@@ -4158,7 +4158,7 @@ start:
     call printButtons
     dontprint:
 
-    ;for clear button
+    ;BOTAO LIMPAR
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4182,7 +4182,7 @@ start:
     call highlightClear
     skipit:
 
-    ;for button one
+    ;BOTAO UM
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4206,7 +4206,7 @@ start:
     call highlightOne
     skip:
 
-    ;for button two
+    ;BOTAO DOIS
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4230,7 +4230,7 @@ start:
     call highlightTwo
     skip2:
 
-    ;for button three
+    ;BOTAO TRES
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4250,11 +4250,11 @@ start:
     jl skip3
     cmp dx, 157
     jg skip3
-mov ImpressaoDeBotoes, 1
+    mov ImpressaoDeBotoes, 1
     call highlightThree
     skip3:
 
-    ;for button four
+    ;BOTAO QUATRO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4278,7 +4278,7 @@ mov ImpressaoDeBotoes, 1
     call highlightFour
     skip4:
 
-    ;for button five
+    ;BOTAO CINCO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4302,7 +4302,7 @@ mov ImpressaoDeBotoes, 1
     call highlightFive
     skip5:
 
-    ;for button six
+    ;BOTAO SEIS
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4326,7 +4326,7 @@ mov ImpressaoDeBotoes, 1
     call highlightSix
     skip6:
 
-    ;for button seven
+    ;BOTAO SETE
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4350,7 +4350,7 @@ mov ImpressaoDeBotoes, 1
     call highlightSeven
     skip7:
 
-    ;for button eight
+    ;BOTAO OITO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4374,13 +4374,13 @@ mov ImpressaoDeBotoes, 1
     call highlightEight
     skip8:
 
-    ;for button nine
+    ;BOTAO NOVE
     xor bx,bx
     mov ax,3h
     mov saver,dx
     int 33h
     cmp bx,1
-jne skip9
+    jne skip9
     xor dx,dx
     mov ax,cx
     mov cx,2
@@ -4398,7 +4398,7 @@ jne skip9
     call highlightNine
     skip9:
 
-    ;for button zero
+    ;BOTAO ZERO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4422,7 +4422,7 @@ jne skip9
     call highlightZero
     skip10:
 
-    ;for button =
+    ;BOTAO = RESULTADO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4446,7 +4446,7 @@ jne skip9
     call highlightEqualsSign
     skip11:
 
-    ;for button /
+    ;BOTAO / DIVISAO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4470,7 +4470,7 @@ jne skip9
     call highlightDivisionSign
     skip12:
 
-    ;for button *
+    ;BOTAO * MULTIPLICACAO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4494,7 +4494,7 @@ jne skip9
     call highlightMultiplicationSign
     skip13:
 
-    ;for button -
+    ;BOTAO - SUBTRACAO
     xor bx,bx
     mov ax,3h
     mov saver,dx
@@ -4508,7 +4508,7 @@ jne skip9
     mov dx, saver
     cmp ax, 186
     jl skip14
-cmp ax, 206
+    cmp ax, 206
     jg skip14
     cmp dx, 107
     jl skip14
@@ -4518,7 +4518,7 @@ cmp ax, 206
     call highlightMinusSign
     skip14:
 
-    ;for button +
+    ;BOTAO + ADICAO
     xor bx,bx
     mov ax,3h
     mov saver,dx
