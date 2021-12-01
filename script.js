@@ -1,4 +1,8 @@
-var perguntas = [['exemplo','3']]
+var perguntas = [['2+2','1',
+                  '9*9','2',
+                  '7*9','3',
+                  '6/3','4',
+                  'x^2*4x+9','5',]]
 var resposta = '';
 var jogoContinua; // <- boolean que define se o jogador morreu ou nao no jogo.  true -> vivo      false -> morto
 /*do jeito que eu estou montando, vai ter um array com as perguntas e respostas, e uma funcao para cada "coisa"
