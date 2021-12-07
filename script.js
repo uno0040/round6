@@ -34,43 +34,43 @@ function fimDeJogo(){ //<- funcao que vai declarar o fim de jogo ao jogador e ch
 function reiniciaJogo(){ // <- funcao que vai reiniciar o jogo
 
 }*/
-const instructionBtn = document.getElementById("instructions-btn");
-const startBtn = document.getElementById("start-btn");
-const timer = document.getElementById("timer");
-const comments = document.getElementById("comments");
-const livesCount = document.querySelector(".lives-count");
-const player = document.querySelector(".player-icon");
-const gameBody = document.querySelector(".game-body");
-const glassTiles = document.querySelectorAll(".glass-tile");
-const startPosition = document.querySelector(".player-start-position");
-const endPosition = document.querySelector(".player-end-position");
-const endPositionHolder = document.querySelector(".end-position");
-const gameoverScreen = document.querySelector(".gameover-screen");
-const gameoverText = document.querySelector(".gameover-text");
-const restartBtn = document.getElementById("restart-btn");
+const InstrucaoBotao = document.getElementById("Instrucao-Botao");
+const IniciarBotao = document.getElementById("Iniciar-Botao");
+const Temporizador = document.getElementById("Temporizador");
+const Comentarios = document.getElementById("Comentarios");
+const ContadorDeVidas = document.querySelector(".Contador-De-Vidas");
+const Jogador = document.querySelector(".Icone-Jogador");
+const CorpoDoJogo = document.querySelector(".Corpo-Do-Jogo");
+const Vidro = document.querySelectorAll(".Vidro");
+const PosicaoInicial = document.querySelector(".Posicao-Inicial-Jogador");
+const PosicaoFinal = document.querySelector(".Posicao-Final-Jogador");
+const AsseguraPosicaoFinal = document.querySelector(".Posicao-Final");
+const TelaGameover = document.querySelector(".Tela-Gameover");
+const TextoGameover = document.querySelector(".Texto-Gameover");
+const reIniciarBotao = document.getElementById("reIniciar-Botao");
 
 // Toggle audio
-const myAudio = document.getElementById("myAudio");
+const MeuAudio = document.getElementById("MeuAudio");
 
 function togglePlay() {
-  myAudio.volume = 0.2;
-  return myAudio.paused ? myAudio.play() : myAudio.pause();
+  MeuAudio.volume = 0.2;
+  return MeuAudio.paused ? MeuAudio.play() : MeuAudio.pause();
 }
 
-let time = 30;
-let startgame = false;
-let totalLife = 3;
-let lostTilesRandom = [];
-let loseLife = false;
-let previousTileCleared = true;
-let previousTile;
-let playerIcon;
+let Tempo = 30;
+let iniciajogo = false;
+let totaldevidas = 3;
+let perdervidroaleatoriamente = [];
+let perdervida = false;
+let vidroanteriorlimpo = true;
+let proximovidro;
+let iconejogador;
 let i = 1;
 let gameover = false;
-let interval;
+let intervalo;
 
-// SETTING THE TILES
-const tilesArray = {
+// CONFIGURANDO OS VIDROS
+const VidroMatriz = {
   1: [1, 2],
   2: [3, 4],
   3: [5, 6],
@@ -80,22 +80,22 @@ const tilesArray = {
   7: [13, 14],
 };
 
-// instructions button pop-up
+// instrução para notificação do botão
 function instructions() {
   alert(
-    "Players will attempt to cross two parallel bridges by jumping across tempered glass panels while avoiding weaker panes of regular glass. Those who land on a regular glass panel will fall to your DEATH⚰️, resulting in a life lost. You have 3 lives, so use them well"
+    "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de vidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no vidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
   );
 }
-instructionBtn.addEventListener("click", instructions);
+InstrucaoBotao.addEventListener("click", instructions);
 
 //start button control
-startBtn.addEventListener("click", () => {
-  startgame = true;
-  interval = setInterval(() => {
-    if (time > 0) {
-      time--;
-      timer.innerText = `Time : ${time}sec`;
-      if (time == 0) {
+IniciarBotao.addEventListener("click", () => {
+  iniciajogo = true;
+  intervalo = setintervalo(() => {
+    if (Tempo > 0) {
+      Tempo--;
+      Temporizador.innerText = `Tempo : ${Tempo}sec`;
+      if (Tempo == 0) {
         gameOver();
       }
     }
@@ -103,14 +103,14 @@ startBtn.addEventListener("click", () => {
 });
 
 //generating random losing tiles for the game
-lostTilesRandom = ComputerGenerateRandomTiles(tilesArray);
+perdervidroaleatoriamente = ComputerGenerateRandomTiles(VidroMatriz);
 
 //computer generating random tile numbers to lose
-function ComputerGenerateRandomTiles(tilesArray) {
+function ComputerGenerateRandomTiles(VidroMatriz) {
   let Tiles = [];
 
-  for (const set in tilesArray) {
-    Tiles.push(getRandom(tilesArray[set][0], tilesArray[set][1]));
+  for (const set in VidroMatriz) {
+    Tiles.push(getRandom(VidroMatriz[set][0], VidroMatriz[set][1]));
   }
 
   return Tiles;
@@ -118,29 +118,29 @@ function ComputerGenerateRandomTiles(tilesArray) {
 // console.log(ComputerGenerateRandomTiles());
 
 //once the game starts
-glassTiles.forEach((tile) => {
+Vidro.forEach((tile) => {
   tile.addEventListener("click", () => {
-    //checking if startgame button was pressed
-    if (!startgame) {
-      // return (comments.innerHTML = "Please press the start button!");
+    //checking if iniciajogo button was pressed
+    if (!iniciajogo) {
+      // return (Comentarios.innerHTML = "Please press the start button!");
       alert("Please press the start button!");
     }
 
     // checking if the previous tile set was cleared
     if (
-      tilesArray[i][0] == tile.dataset.value ||
-      tilesArray[i][1] == tile.dataset.value
+      VidroMatriz[i][0] == tile.dataset.value ||
+      VidroMatriz[i][1] == tile.dataset.value
     ) {
       // console.log("cleared");
 
-      previousTileCleared = true;
+      vidroanteriorlimpo = true;
 
-      //removing the player icon from the previous tile
-      if (i != 1) previousTile.removeChild(player);
+      //removing the Jogador icon from the previous tile
+      if (i != 1) proximovidro.removeChild(Jogador);
       // checking if it is a losing tile
-      lostTilesRandom.forEach((lostTile) => {
+      perdervidroaleatoriamente.forEach((lostTile) => {
         if (tile.dataset.value == lostTile) {
-          loseLife = true;
+          perdervida = true;
 
           // console.log("lives - 1");
         }
@@ -149,7 +149,7 @@ glassTiles.forEach((tile) => {
     }
     if (tile.dataset.value) {
       alert("Previous set has not been selected! Do not cheat!");
-      previousTileCleared = false;
+      vidroanteriorlimpo = false;
       return;
     }
 
@@ -157,34 +157,34 @@ glassTiles.forEach((tile) => {
   });
 });
 
-glassTiles.forEach((tile) => {
+Vidro.forEach((tile) => {
   tile.addEventListener("click", () => {
-    //checking if startgame button was pressed
-    if (!startgame) return;
-    if (!previousTileCleared) return;
-    if (loseLife) {
-      comments.innerText = "You lost a life!";
+    //checking if iniciajogo button was pressed
+    if (!iniciajogo) return;
+    if (!vidroanteriorlimpo) return;
+    if (perdervida) {
+      Comentarios.innerText = "You lost a life!";
       tile.style.backgroundColor = "black";
-      startPosition.appendChild(player);
+      PosicaoInicial.appendChild(Jogador);
       i = 1;
-      totalLife--;
-      livesCount.innerText = `Lives left : ${totalLife}`;
+      totaldevidas--;
+      ContadorDeVidas.innerText = `Lives left : ${totaldevidas}`;
 
-      loseLife = false; //resetting the loselife
+      perdervida = false; //resetting the perdervida
       tile.dataset.value = null;
 
       //checking if total life is 0
-      if (totalLife == 0) {
+      if (totaldevidas == 0) {
         // console.log("gameover");
         gameOver();
       }
       //
     } else {
-      //if the player steps onto the correct tile then i++
+      //if the Jogador steps onto the correct tile then i++
       i++;
-      movePlayer(tile);
+      moveJogador(tile);
       //   console.log("move on");
-      comments.innerText = "Move forward!";
+      Comentarios.innerText = "Move forward!";
     }
     // console.log(tile);
   });
@@ -197,35 +197,35 @@ function getRandom(min, max) {
 }
 // console.log(getRandom());
 
-// player moving to the next tile set
-function movePlayer(tile) {
-  tile.appendChild(player);
-  previousTile = tile;
+// Jogador moving to the next tile set
+function moveJogador(tile) {
+  tile.appendChild(Jogador);
+  proximovidro = tile;
 }
 
 //To win the game
-endPosition.addEventListener("click", () => {
+PosicaoFinal.addEventListener("click", () => {
   if (i >= 8 && !gameover) {
-    endPosition.removeChild(endPositionHolder);
-    endPosition.appendChild(player);
+    PosicaoFinal.removeChild(AsseguraPosicaoFinal);
+    PosicaoFinal.appendChild(Jogador);
     winGame();
   }
 });
 //
 
 //to restart the game
-restartBtn.addEventListener("click", () => {
+reIniciarBotao.addEventListener("click", () => {
   window.location = "./";
 });
 
 function gameOver() {
-  gameBody.classList.add("hide");
-  gameoverScreen.classList.remove("hide");
-  clearInterval(interval);
+  CorpoDoJogo.classList.add("hide");
+  TelaGameover.classList.remove("hide");
+  clearintervalo(intervalo);
 }
 
 function winGame() {
-  gameBody.classList.add("hide");
-  gameoverText.innerText = "You Won! I'll get you next time ";
-  gameoverScreen.classList.remove("hide");
+  CorpoDoJogo.classList.add("hide");
+  TextoGameover.innerText = "You Won! I'll get you next Tempo ";
+  TelaGameover.classList.remove("hide");
 }
