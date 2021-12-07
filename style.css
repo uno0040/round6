@@ -37,7 +37,7 @@ img {
   padding: 10px 0 10px 0;
   font-size: 20px;
   font-weight: bolder;
-  background-color: #136452;
+  background-color: #2b0152;
   color: white;
   cursor: pointer;
   text-align: center;
@@ -82,8 +82,8 @@ img {
   border-radius: 30px;
   padding: 10px 0 10px 0;
   font-size: 35px;
-  background-color: #136452;
-  color: gold;
+  background-color: #2b0152;
+  color: rgb(174, 0, 255);
   cursor: pointer;
   /* text-align: center; */
 }
@@ -232,7 +232,7 @@ img {
   display: block;
   margin: 0 auto;
   height: 100px;
-  background-color: #136452;
+  background-color: #2b0152;
   color: white;
   font-size: 45px;
   border-radius: 10px;
