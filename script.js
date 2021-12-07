@@ -102,10 +102,10 @@ IniciarBotao.addEventListener("click", () => {
   }, 1000);
 });
 
-//generating random losing tiles for the game
+//geração randomica dos vidros
 perdervidroaleatoriamente = ComputerGenerateRandomTiles(VidroMatriz);
 
-//computer generating random tile numbers to lose
+//geração randomica do numero do vidro
 function ComputerGenerateRandomTiles(VidroMatriz) {
   let Tiles = [];
 
@@ -117,16 +117,16 @@ function ComputerGenerateRandomTiles(VidroMatriz) {
 }
 // console.log(ComputerGenerateRandomTiles());
 
-//once the game starts
+//assim que o jogo começar
 Vidro.forEach((tile) => {
   tile.addEventListener("click", () => {
-    //checking if iniciajogo button was pressed
+    //chegando se iniciajogo foi precionado
     if (!iniciajogo) {
       // return (Comentarios.innerHTML = "Please press the start button!");
       alert("Please press the start button!");
     }
 
-    // checking if the previous tile set was cleared
+    // verificar se o set de blocos anterior foi apagado
     if (
       VidroMatriz[i][0] == tile.dataset.value ||
       VidroMatriz[i][1] == tile.dataset.value
