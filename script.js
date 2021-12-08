@@ -88,7 +88,7 @@ function instructions() {
 }
 InstrucaoBotao.addEventListener("click", instructions);
 
-//start button control
+//Controle de botão iniciar 
 IniciarBotao.addEventListener("click", () => {
   iniciajogo = true;
   intervalo = setintervalo(() => {
@@ -102,11 +102,11 @@ IniciarBotao.addEventListener("click", () => {
   }, 1000);
 });
 
-//generating random losing tiles for the game
-perdervidroaleatoriamente = ComputerGenerateRandomTiles(VidroMatriz);
+//gerando peças perdidas aleatórias para o jogo
+perdervidroaleatoriamente = ComputadorGerandoVidrosAleatorios(VidroMatriz);
 
-//computer generating random tile numbers to lose
-function ComputerGenerateRandomTiles(VidroMatriz) {
+//computador gerando números de blocos aleatórios para perder
+function ComputadorGerandoVidrosAleatorios(VidroMatriz) {
   let Tiles = [];
 
   for (const set in VidroMatriz) {
@@ -115,14 +115,14 @@ function ComputerGenerateRandomTiles(VidroMatriz) {
 
   return Tiles;
 }
-// console.log(ComputerGenerateRandomTiles());
+// console.log(ComputadorGerandoVidrosAleatorios());
 
-//once the game starts
+//quando o jogo começar
 Vidro.forEach((tile) => {
   tile.addEventListener("click", () => {
-    //checking if iniciajogo button was pressed
+    //checando se o botao iniciajogo foi apertado
     if (!iniciajogo) {
-      // return (Comentarios.innerHTML = "Please press the start button!");
+      // retorna (Comentarios.innerHTML = "Por favor inicie o botão iniciar!");
       alert("Please press the start button!");
     }
 
