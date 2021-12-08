@@ -1,36 +1,35 @@
-/*var perguntas = [['2+2','1',
-                  '9*9','2',
-                  '7*9','3',
-                  '6/3','4',
-                  'x^2*4x+9','5',
-                  'x^2*4x+9','5',
-                  '7x+77*x3x^2','6'
-                  '(33+7x)x^2','7',
-                  'x^2-(44*3)7 ,'8',
-                  'x^3+44*5+x ,'9',
-                  'x^3-77x*9 ,'10',
-                  '3 + 4m – 9 = 6m – 4 + 12 ,'11',
-                  '–5 + 3x + 4 = 11 + 9x ,'12',
-                  '3(x + 2) = 15 ,'13',
-                  '–5(k – 4 ) + 4 = 2(-2k – 2) ,'14',
-                  '25x^2 = 20x – 4  ,'15',
-                  '2x = 15 – x^2 ,'16',
-                  '4 + x ( x - 4) = x ,'17',
-                  'x ( x + 3) – 40 = 0 ,'18',
-                  '7x^2 + x + 2 = 0 ,'19',
-                  'x^2 - 18x + 45 = 0  ,'20',
-                  '-x^2 - x + 30 = 0 ,'21',
-                  'x^2 - 6x + 9 = 0  ,'22',
-                  '(x + 3)^2 = 1 ,'23',
-                  '(x - 5)^2 = 1 ,'24',
-                  '(2x - 4)^2 = 0 ,'25',
-                  '(x - 3)² = -2x^2 ,'26',
-                  'x^2 + 3x - 28 = 0  ,'27',
-                  '3x^2 - 4x + 2 = 0   ,'28',
-                  'x^2 - 3 = 4x + 2  ,'29',
-                  'x^3 + 4x2 – x – 4 = 0 ,'30',
-                  '(x - 8)^2 = 7 ,'31',
-                  '(x + 7)^2-7 = 7 ,'32',
+/*var perguntas = [['2+2','1',  4
+                  '9*9','2',  81
+                  '7*9','3',  63
+                  '6/3','4',  2
+                  'x^2*4x+9','5',   4x^3+9
+                  '3x^2-18x+24 = 0','6',  6
+                  '(33+7x)x^2','7',   33x^2+7x^3
+                  'x^2-(44*3)7 ,'8',  x^2-924
+                  'Quantas soluções inteiras a inequação x² + x - 20 ≤ 0 admite? ,'9',    10
+                  'A soma dos números inteiros x que satisfazem 2x + 1 ≤ x +3 ≤ 4x é '10',    3
+                  'Sejam x e y números tais que os conjuntos {0, 7, 1} e {x, y, 1} são iguais. Então, podemos afirmar que: ,'11',   X+Y = 7
+                  'x – y = 2 e x2 + y2 = 8, então x3 – y3 é igual a: ,'12',   20
+                  'Se x + y = 13 e x · y = 1, então x2 + y2 é: ,'13',   167
+                  'Se cos 2θ = 7/25 e θ pertence ao primeiro quadrante, então cos θ é igual a:,'14',  4/5
+                  'João recebeu um aumento de 10% e com isso seu salário chegou a R$1.320,00. O salário de João antes do aumento era igual a? ,'15',  1200 reais
+                  'Sendo A o ponto da reta 2x + y −1 = 0 que equidista dos pontos B = (1,1) e C = (0,−1) , e sendo D = (0,1) , a área do triângulo ACD vale,'16', 1/2
+                  ','17',
+                  ','18',
+                  ','19',
+                  ' ,'20',
+                  ','21',
+                  ','22',
+                  ' ,'23',
+                  ','24',
+                  ','25',
+                  ','26',
+                  ','27',
+                  ','28',
+                  ','29',
+                  ','30',
+                  ' ,'31',
+                  ' ,'32',
                 ]]
 var resposta = '';
 var jogoContinua; // <- boolean que define se o jogador morreu ou nao no jogo.  true -> vivo      false -> morto
