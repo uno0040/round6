@@ -3,6 +3,7 @@
                   '7*9','3',
                   '6/3','4',
                   'x^2*4x+9','5',
+                  'x^2*4x+9','5',
                   '7x+77*x3x^2','6'
                   '(33+7x)x^2','7',
                   'x^2-(44*3)7 ,'8',
@@ -69,7 +70,7 @@ const Comentarios = document.getElementById("Comentarios");
 const ContadorDeVidas = document.querySelector(".Contador-De-Vidas");
 const Jogador = document.querySelector(".Icone-Jogador");
 const CorpoDoJogo = document.querySelector(".Corpo-Do-Jogo");
-const Vidro = document.querySelectorAll(".Vidro");
+const TelhasDeVidro = document.querySelectorAll(".TelhasDeVidro");
 const PosicaoInicial = document.querySelector(".Posicao-Inicial-Jogador");
 const PosicaoFinal = document.querySelector(".Posicao-Final-Jogador");
 const AsseguraPosicaoFinal = document.querySelector(".Posicao-Final");
@@ -88,17 +89,17 @@ function togglePlay() {
 let Tempo = 30;
 let iniciajogo = false;
 let totaldevidas = 3;
-let perdervidroaleatoriamente = [];
+let perderTelhasDeVidroaleatoriamente = [];
 let perdervida = false;
-let vidroanteriorlimpo = true;
-let proximovidro;
+let TelhasDeVidroanteriorlimpo = true;
+let proximoTelhasDeVidro;
 let iconejogador;
 let i = 1;
 let gameover = false;
 let intervalo;
 
-// CONFIGURANDO OS VIDROS
-const VidroMatriz = {
+// CONFIGURANDO OS TelhasDeVidroS
+const TelhasDeVidroMatriz = {
   1: [1, 2],
   2: [3, 4],
   3: [5, 6],
@@ -111,7 +112,7 @@ const VidroMatriz = {
 // instrução para notificação do botão
 function instructions() {
   alert(
-    "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de vidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no vidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
+    "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de TelhasDeVidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no TelhasDeVidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
   );
 }
 InstrucaoBotao.addEventListener("click", instructions);
@@ -131,53 +132,53 @@ IniciarBotao.addEventListener("click", () => {
 });
 
 //gerando peças perdidas aleatórias para o jogo
-perdervidroaleatoriamente = ComputadorGerandoVidrosAleatorios(VidroMatriz);
+perderTelhasDeVidroaleatoriamente = ComputadorGerandoTelhasDeVidrosAleatorios(TelhasDeVidroMatriz);
 
 //computador gerando números de blocos aleatórios para perder
-function ComputadorGerandoVidrosAleatorios(VidroMatriz) {
-  let Tiles = [];
+function ComputadorGerandoTelhasDeVidrosAleatorios(TelhasDeVidroMatriz) {
+  let Telhas = [];
 
-  for (const set in VidroMatriz) {
-    Tiles.push(getRandom(VidroMatriz[set][0], VidroMatriz[set][1]));
+  for (const set in TelhasDeVidroMatriz) {
+    Telhas.push(getRandom(TelhasDeVidroMatriz[set][0], TelhasDeVidroMatriz[set][1]));
   }
 
-  return Tiles;
+  return Telhas;
 }
-// console.log(ComputadorGerandoVidrosAleatorios());
+// console.log(ComputadorGerandoTelhasDeVidrosAleatorios());
 
 //quando o jogo começar
-Vidro.forEach((tile) => {
-  tile.addEventListener("click", () => {
+TelhasDeVidro.forEach((Telha) => {
+  Telha.addEventListener("click", () => {
     //checando se o botao iniciajogo foi apertado
     if (!iniciajogo) {
       // retorna (Comentarios.innerHTML = "Por favor inicie o botão iniciar!");
       alert("Please press the start button!");
     }
 
-    // checking if the previous tile set was cleared
+    // verificar se o conjunto de TelhasDeVidros anterior foi apagado
     if (
-      VidroMatriz[i][0] == tile.dataset.value ||
-      VidroMatriz[i][1] == tile.dataset.value
+      TelhasDeVidroMatriz[i][0] == Telha.dataset.value ||
+      TelhasDeVidroMatriz[i][1] == Telha.dataset.value
     ) {
-      // console.log("cleared");
+      // console.log("Limpo");
 
-      vidroanteriorlimpo = true;
+      TelhasDeVidroanteriorlimpo = true;
 
-      //removing the Jogador icon from the previous tile
-      if (i != 1) proximovidro.removeChild(Jogador);
-      // checking if it is a losing tile
-      perdervidroaleatoriamente.forEach((lostTile) => {
-        if (tile.dataset.value == lostTile) {
+      //removendo o ícone do Jogador do TelhasDeVidro anterior
+      if (i != 1) proximoTelhasDeVidro.removeChild(Jogador);
+      // Verificando se é um TelhasDeVidro errado
+      perderTelhasDeVidroaleatoriamente.forEach((lostTelha) => {
+        if (Telha.dataset.value == lostTelha) {
           perdervida = true;
 
-          // console.log("lives - 1");
+          // console.log("vidas - 1");
         }
       });
       return;
     }
-    if (tile.dataset.value) {
-      alert("Previous set has not been selected! Do not cheat!");
-      vidroanteriorlimpo = false;
+    if (Telha.dataset.value) {
+      alert("O TelhasDeVidro de trás não foi selecionado, por favor não roube!");
+      TelhasDeVidroanteriorlimpo = false;
       return;
     }
 
@@ -185,53 +186,53 @@ Vidro.forEach((tile) => {
   });
 });
 
-Vidro.forEach((tile) => {
-  tile.addEventListener("click", () => {
-    //checking if iniciajogo button was pressed
+TelhasDeVidro.forEach((Telha) => {
+  Telha.addEventListener("click", () => {
+    //verificando se o botão iniciajogo foi pressionado
     if (!iniciajogo) return;
-    if (!vidroanteriorlimpo) return;
+    if (!TelhasDeVidroanteriorlimpo) return;
     if (perdervida) {
-      Comentarios.innerText = "You lost a life!";
-      tile.style.backgroundColor = "black";
+      Comentarios.innerText = "Você perdeu uma vida!";
+      Telha.style.backgroundColor = "black";
       PosicaoInicial.appendChild(Jogador);
       i = 1;
       totaldevidas--;
-      ContadorDeVidas.innerText = `Lives left : ${totaldevidas}`;
+      ContadorDeVidas.innerText = `Vidas restantes : ${totaldevidas}`;
 
-      perdervida = false; //resetting the perdervida
-      tile.dataset.value = null;
+      perdervida = false; //Resetando o perdervida
+      Telha.dataset.value = null;
 
-      //checking if total life is 0
+      //checando se o total de vidas é 0
       if (totaldevidas == 0) {
         // console.log("gameover");
         gameOver();
       }
       //
     } else {
-      //if the Jogador steps onto the correct tile then i++
+      //se o jogador pisa no TelhasDeVidro certo, então i++
       i++;
-      moveJogador(tile);
-      //   console.log("move on");
-      Comentarios.innerText = "Move forward!";
+      moveJogador(Telha);
+      //   console.log("ir em frente");
+      Comentarios.innerText = "Siga em frente!";
     }
-    // console.log(tile);
+    // console.log(Telha);
   });
 });
 
-// randomizing each tile set
+// randomizar cada conjunto de TelhasDeVidros
 function getRandom(min, max) {
-  max++; //since the max value is not included
+  max++; //uma vez que o valor máximo não está incluído
   return Math.floor(Math.random() * (max - min)) + min;
 }
-// console.log(getRandom());
+// console.log(getAleatorio());
 
-// Jogador moving to the next tile set
-function moveJogador(tile) {
-  tile.appendChild(Jogador);
-  proximovidro = tile;
+// Jogador se movendo para o próximo conjunto de TelhasDeVidro
+function moveJogador(Telha) {
+  Telha.appendChild(Jogador);
+  proximoTelhasDeVidro = Telha;
 }
 
-//To win the game
+//Para ganhar o jogo
 PosicaoFinal.addEventListener("click", () => {
   if (i >= 8 && !gameover) {
     PosicaoFinal.removeChild(AsseguraPosicaoFinal);
@@ -241,19 +242,19 @@ PosicaoFinal.addEventListener("click", () => {
 });
 //
 
-//to restart the game
+//Para resetar o jogo
 reIniciarBotao.addEventListener("click", () => {
   window.location = "./";
 });
 
 function gameOver() {
-  CorpoDoJogo.classList.add("hide");
-  TelaGameover.classList.remove("hide");
+  CorpoDoJogo.classList.add("ocultar");
+  TelaGameover.classList.remove("ocultar");
   clearintervalo(intervalo);
 }
 
 function winGame() {
-  CorpoDoJogo.classList.add("hide");
-  TextoGameover.innerText = "You Won! I'll get you next Tempo ";
-  TelaGameover.classList.remove("hide");
+  CorpoDoJogo.classList.add("ocultar");
+  TextoGameover.innerText = "Você ganhou! Te pegarei na próxima vez ";
+  TelaGameover.classList.remove("ocultar");
 }
