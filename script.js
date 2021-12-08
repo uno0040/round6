@@ -2,7 +2,14 @@
                   '9*9','2',
                   '7*9','3',
                   '6/3','4',
-                  'x^2*4x+9','5',]]
+                  'x^2*4x+9','5',
+                  '7x+77*x3x^2','6'
+                  '(33+7x)x^2','7',
+                  'x^2-(44*3)7 ,'8',
+                  'x^3+44*5+x ,'9',
+                  'x^3-77x*9 ,'10',
+                
+                ]]
 var resposta = '';
 var jogoContinua; // <- boolean que define se o jogador morreu ou nao no jogo.  true -> vivo      false -> morto
 /*do jeito que eu estou montando, vai ter um array com as perguntas e respostas, e uma funcao para cada "coisa"
