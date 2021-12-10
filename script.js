@@ -14,22 +14,22 @@
                   'Se cos 2θ = 7/25 e θ pertence ao primeiro quadrante, então cos θ é igual a:,'14',  4/5
                   'João recebeu um aumento de 10% e com isso seu salário chegou a R$1.320,00. O salário de João antes do aumento era igual a? ,'15',  1200 reais
                   'Sendo A o ponto da reta 2x + y −1 = 0 que equidista dos pontos B = (1,1) e C = (0,−1) , e sendo D = (0,1) , a área do triângulo ACD vale,'16', 1/2
-                  ','17',
-                  ','18',
-                  ','19',
-                  ' ,'20',
-                  ','21',
-                  ','22',
-                  ' ,'23',
-                  ','24',
-                  ','25',
-                  ','26',
-                  ','27',
-                  ','28',
-                  ','29',
-                  ','30',
-                  ' ,'31',
-                  ' ,'32',
+                  'O número de soluções da equação  , com x > 0, é igual a:,'17', 1
+                  'O número de soluções da equação x=√6-x , com x > 0, é igual a:,'18', 1
+                  'A soma dos inversos das raízes da equação x² -10x + 22 = 0 é igual a:,'19',  5/11
+                  'A soma de todas as frações da forma n/(n+1), onde n é um elemento do conjunto {1, 2, 3, 4, 5}, é ,'20',  3,55
+                  'Quatro moedas são lançadas simultaneamente. Qual é a probabilidade de ocorrer coroa em uma só moeda?,'21', 2/9
+                  'Jogamos dois dados comuns. Qual a probabilidade de que o total de pontos seja igual a 10?,'22',  1/12
+                  'A probabilidade de um casal com quatro filhos ter dois do sexo masculino e dois do sexo feminino é: ,'23', 37,5%
+                  'A probabilidade de um dos cem números 1, 2, 3, 4, ..., 100 ser múltiplo de 6 e de 10 ao mesmo tempo é:,'24', 3%
+                  'Sendo x um arco do segundo quadrante tal que sen x = 3/7 , o valor de tgx é:,'25', -(3 √10)/20
+                  'A soma de todos os números naturais ímpares de 3 algarismos é:,'26', 247.500
+                  'Quantos termos a soma 5+ 7+ 9+ 11+⋯ deve ter para que o total seja 2700 ?,'27',  50
+                  'A média aritmética das raízes da equação modular |2x – 4|  + |x + 1| = 4 é igual a:,'28', 5/3
+                  'Para que o polinômio P(x) = x5 - 2x4 + kx3 - 3x2 + 6 seja divisível pelo binômio -x + 1, o valor de k deve ser igual a:,'29',  -2
+                  'Considerando-se os algarismos significativos dos números 28,7 e 1,03, podemos afirmar que a soma destes números é dada por:,'30',  29,7
+                  'Seja A uma matriz invertível de ordem 3 tal que a matriz A5+ 2A4 é a matriz nula. O determinante de A é: ,'31',    -8
+                  'Considere a equação x² + 12x + k = 0. Para qual valor de k esta equação NÃO possui raízes inteiras? ,'32',   34
                 ]]
 var resposta = '';
 var jogoContinua; // <- boolean que define se o jogador morreu ou nao no jogo.  true -> vivo      false -> morto
