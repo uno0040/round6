@@ -62,7 +62,7 @@ function fimDeJogo(){ //<- funcao que vai declarar o fim de jogo ao jogador e ch
 function reiniciaJogo(){ // <- funcao que vai reiniciar o jogo
 
 }*/
-const InstrucaoBotao = document.getElementById("Instrucao-Botao");
+const InstrucaoBotao = document.getElementById("instrucao-botao");
 const IniciarBotao = document.getElementById("Iniciar-Botao");
 const Temporizador = document.getElementById("Temporizador");
 const Comentarios = document.getElementById("Comentarios");
@@ -78,11 +78,11 @@ const TextoGameover = document.querySelector(".Texto-Gameover");
 const reIniciarBotao = document.getElementById("reIniciar-Botao");
 
 // Toggle audio
-const MeuAudio = document.getElementById("MeuAudio");
+const musicatema = document.getElementById("musicatema");
 
 function togglePlay() {
-  MeuAudio.volume = 0.2;
-  return MeuAudio.paused ? MeuAudio.play() : MeuAudio.pause();
+  musicatema.volume = 0.1;
+  return musicatema.paused ? musicatema.play() : musicatema.pause();
 }
 
 let Tempo = 30;
