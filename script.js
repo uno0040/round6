@@ -62,12 +62,12 @@ function fimDeJogo(){ //<- funcao que vai declarar o fim de jogo ao jogador e ch
 function reiniciaJogo(){ // <- funcao que vai reiniciar o jogo
 
 }*/
-const InstrucaoBotao = document.getElementById("instrucao-botao");
-const IniciarBotao = document.getElementById("Iniciar-Botao");
-const Temporizador = document.getElementById("Temporizador");
-const Comentarios = document.getElementById("Comentarios");
-const ContadorDeVidas = document.querySelector(".Contador-De-Vidas");
-const Jogador = document.querySelector(".Icone-Jogador");
+const InstrucaoBotao = document.getElementById("botaoinstrucoes");
+const IniciarBotao = document.getElementById("botaoiniciar");
+const Temporizador = document.getElementById("temporizador");
+const Comentarios = document.getElementById("comentarios");
+const ContadorDeVidas = document.querySelector(".contador-de-vidas");
+const Jogador = document.querySelector(".iconejogador");
 const CorpoDoJogo = document.querySelector(".Corpo-Do-Jogo");
 const TelhasDeVidro = document.querySelectorAll(".TelhasDeVidro");
 const PosicaoInicial = document.querySelector(".Posicao-Inicial-Jogador");
@@ -77,7 +77,7 @@ const TelaGameover = document.querySelector(".Tela-Gameover");
 const TextoGameover = document.querySelector(".Texto-Gameover");
 const reIniciarBotao = document.getElementById("reIniciar-Botao");
 
-// Toggle audio
+// desliga ou liga a musica
 const musicatema = document.getElementById("musicatema");
 
 function togglePlay() {
@@ -85,16 +85,16 @@ function togglePlay() {
   return musicatema.paused ? musicatema.play() : musicatema.pause();
 }
 
-let Tempo = 30;
+let Tempo = 30; // tempo para responder a pergunta
 let iniciajogo = false;
-let totaldevidas = 3;
+let totaldevidas = 3; // numero total de vidas
 let perderTelhasDeVidroaleatoriamente = [];
 let perdervida = false;
 let TelhasDeVidroanteriorlimpo = true;
 let proximoTelhasDeVidro;
 let iconejogador;
 let i = 1;
-let gameover = false;
+let gameover = false; // perda total de vidas ocasiona nisso
 let intervalo;
 
 // CONFIGURANDO OS TelhasDeVidroS
@@ -143,7 +143,7 @@ function ComputadorGerandoTelhasDeVidrosAleatorios(TelhasDeVidroMatriz) {
 
   return Telhas;
 }
-// console.log(ComputadorGerandoTelhasDeVidrosAleatorios());
+// console.log(ComputadorGerandoTelhasDeVidrosAleatorios()); <- que porra eh essa ?
 
 //quando o jogo começar
 TelhasDeVidro.forEach((Telha) => {
@@ -231,7 +231,7 @@ function moveJogador(Telha) {
   proximoTelhasDeVidro = Telha;
 }
 
-//Para ganhar o jogo
+// detecta condicao de vitoria de jogo
 PosicaoFinal.addEventListener("click", () => {
   if (i >= 8 && !gameover) {
     PosicaoFinal.removeChild(AsseguraPosicaoFinal);
@@ -241,7 +241,7 @@ PosicaoFinal.addEventListener("click", () => {
 });
 //
 
-//Para resetar o jogo
+// aciona o reinicio do jogo
 reIniciarBotao.addEventListener("click", () => {
   window.location = "./";
 });
