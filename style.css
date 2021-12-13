@@ -96,7 +96,7 @@ img {
   /* text-align: center; */
 }
 
-.game-timer {
+.temporizadordisplay {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   font-size: 35px;
@@ -151,7 +151,7 @@ img {
   grid-template-columns: repeat(7, 1fr);
 }
 
-.game-area {
+.espacamentodojogo {
   display: grid;
   grid-template-columns: 1fr 9fr 1fr;
 }

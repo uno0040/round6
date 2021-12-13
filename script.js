@@ -62,30 +62,30 @@ function fimDeJogo(){ //<- funcao que vai declarar o fim de jogo ao jogador e ch
 function reiniciaJogo(){ // <- funcao que vai reiniciar o jogo
 
 }*/
-const InstrucaoBotao = document.getElementById("botaoinstrucoes");
-const IniciarBotao = document.getElementById("botaoiniciar");
-const Temporizador = document.getElementById("temporizador");
-const Comentarios = document.getElementById("comentarios");
-const ContadorDeVidas = document.querySelector(".contador-de-vidas");
-const Jogador = document.querySelector(".iconejogador");
-const bodydojogo = document.querySelector(".bodydojogo");
-const vidro = document.querySelectorAll(".vidro");
-const PosicaoInicial = document.querySelector(".posicaoinicial");
-const PosicaoFinal = document.querySelector(".posicaofinal");
-const AsseguraPosicao = document.querySelector(".posicaosegurada"); // <--
-const TelaGameover = document.querySelector(".displaygameover");
-const TextoGameover = document.querySelector(".disptextogameover");
-const reIniciarBotao = document.getElementById("botaoreiniciar");
+const InstrucaoBotao = document.getElementById("botaoinstrucoes"); // botao de instrucoes
+const IniciarBotao = document.getElementById("botaoiniciar"); // botao que inicia o jogo
+const Temporizador = document.getElementById("temporizador"); // temporizador
+const Comentarios = document.getElementById("comentarios"); // comentarios no html
+const ContadorDeVidas = document.querySelector(".contador-de-vidas"); // conta vidas
+const Jogador = document.querySelector(".iconejogador"); // icone do jogador que ainda precisa ser implementado
+const bodydojogo = document.querySelector(".bodydojogo"); // corpo do jogo, classe do css
+const vidro = document.querySelectorAll(".vidro"); // opcoes, os "vidros" da serie
+const PosicaoInicial = document.querySelector(".posicaoinicial"); // posicao inicial
+const PosicaoFinal = document.querySelector(".posicaofinal"); // ultima posicao
+const AsseguraPosicao = document.querySelector(".posicaosegurada"); // <-- segura a ultima posicao registrada
+const TelaGameover = document.querySelector(".displaygameover"); // tela de game over
+const TextoGameover = document.querySelector(".disptextogameover"); // texto de game over
+const reIniciarBotao = document.getElementById("botaoreiniciar"); // botao que reinicia o game
 
 // desliga ou liga a musica
-const musicatema = document.getElementById("musicatema");
+const musicatema = document.getElementById("musicatema"); // musica tema do squid game?
 
-function togglePlay() {
+function togglePlay() { // pausa ou nao a musica
   musicatema.volume = 0.1;
   return musicatema.paused ? musicatema.play() : musicatema.pause();
 }
 
-let Tempo = 30; // tempo para responder a pergunta
+let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
 let totaldevidas = 3; // numero total de vidas
 let perdervidroaleatoriamente = [];
@@ -143,12 +143,12 @@ function ComputadorGerandovidrosAleatorios(vidroMatriz) {
 
   return Telhas;
 }
-// console.log(ComputadorGerandovidrosAleatorios()); <- que porra eh essa ?
+// console.log(ComputadorGerandovidrosAleatorios()); <- pra que esse nome ?
 
-//quando o jogo começar
+// quando o jogo começar
 vidro.forEach((Telha) => {
   Telha.addEventListener("click", () => {
-    //checando se o botao iniciajogo foi apertado
+    // checando se o botao iniciajogo foi apertado
     if (!iniciajogo) {
       // retorna (Comentarios.innerHTML = "Por favor inicie o botão iniciar!");
       alert("Pressione primeiro o botao iniciar!");
@@ -170,7 +170,7 @@ vidro.forEach((Telha) => {
         if (Telha.dataset.value == lostTelha) {
           perdervida = true;
 
-          // console.log("vidas - 1");
+          // DEBUG console.log("vidas - 1");
         }
       });
       return;
