@@ -137,7 +137,7 @@ img {
 }
 
 #vidro-baixo {
-  align-self: flex-start;
+  align-self: flex-inicio;
   margin-top: 2.5px;
 }
 
@@ -156,8 +156,8 @@ img {
   grid-template-columns: 1fr 9fr 1fr;
 }
 
-.start,
-.finish {
+.inicio,
+.fim {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
@@ -167,14 +167,14 @@ img {
   border-radius: 10px;
 }
 
-.start {
+.inicio {
   margin-right: 10px;
   margin-left: 10px;
   border: 7px solid #d62473;
   background-color: #d62473;
 }
 
-.finish {
+.fim {
   margin-left: 10px;
   margin-right: 10px;
   border: 7px solid #d62473;
@@ -232,11 +232,11 @@ img {
   font-size: 40px;
 }
 
-.textofimdejogo {
+.disptextogameover {
   text-align: center;
   font-size: 70px;
 }
-#botaorestart {
+#botaoreinicio {
   display: block;
   margin: 0 auto;
   height: 100px;
@@ -247,7 +247,7 @@ img {
   width: 70%;
 }
 
-#botaorestart:hover {
+#botaoreinicio:hover {
   background-color: #d62473;
   color: whitesmoke;
   border: none;
