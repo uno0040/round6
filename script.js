@@ -68,14 +68,14 @@ const Temporizador = document.getElementById("temporizador");
 const Comentarios = document.getElementById("comentarios");
 const ContadorDeVidas = document.querySelector(".contador-de-vidas");
 const Jogador = document.querySelector(".iconejogador");
-const CorpoDoJogo = document.querySelector(".Corpo-Do-Jogo");
-const TelhasDeVidro = document.querySelectorAll(".TelhasDeVidro");
-const PosicaoInicial = document.querySelector(".Posicao-Inicial-Jogador");
-const PosicaoFinal = document.querySelector(".Posicao-Final-Jogador");
-const AsseguraPosicaoFinal = document.querySelector(".Posicao-Final");
-const TelaGameover = document.querySelector(".Tela-Gameover");
-const TextoGameover = document.querySelector(".Texto-Gameover");
-const reIniciarBotao = document.getElementById("reIniciar-Botao");
+const bodydojogo = document.querySelector(".bodydojogo");
+const vidro = document.querySelectorAll(".vidro");
+const PosicaoInicial = document.querySelector(".posicaoinicial");
+const PosicaoFinal = document.querySelector(".posicaofinal");
+const AsseguraPosicao = document.querySelector(".posicaosegurada"); // <--
+const TelaGameover = document.querySelector(".displaygameover");
+const TextoGameover = document.querySelector(".disptextogameover");
+const reIniciarBotao = document.getElementById("botaoreiniciar");
 
 // desliga ou liga a musica
 const musicatema = document.getElementById("musicatema");
@@ -88,17 +88,17 @@ function togglePlay() {
 let Tempo = 30; // tempo para responder a pergunta
 let iniciajogo = false;
 let totaldevidas = 3; // numero total de vidas
-let perderTelhasDeVidroaleatoriamente = [];
+let perdervidroaleatoriamente = [];
 let perdervida = false;
-let TelhasDeVidroanteriorlimpo = true;
-let proximoTelhasDeVidro;
+let vidroanteriorlimpo = true;
+let proximovidro;
 let iconejogador;
 let i = 1;
 let gameover = false; // perda total de vidas ocasiona nisso
 let intervalo;
 
-// CONFIGURANDO OS TelhasDeVidroS
-const TelhasDeVidroMatriz = {
+// CONFIGURANDO OS vidroS
+const vidroMatriz = {
   1: [1, 2],
   2: [3, 4],
   3: [5, 6],
@@ -111,7 +111,7 @@ const TelhasDeVidroMatriz = {
 // instrução para notificação do botão
 function instructions() {
   alert(
-    "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de vidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no TelhasDeVidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
+    "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de vidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no vidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
   );
 }
 InstrucaoBotao.addEventListener("click", instructions);
@@ -131,22 +131,22 @@ IniciarBotao.addEventListener("click", () => {
 });
 
 //gerando peças perdidas aleatórias para o jogo
-perderTelhasDeVidroaleatoriamente = ComputadorGerandoTelhasDeVidrosAleatorios(TelhasDeVidroMatriz);
+perdervidroaleatoriamente = ComputadorGerandovidrosAleatorios(vidroMatriz);
 
 //computador gerando números de blocos aleatórios para perder
-function ComputadorGerandoTelhasDeVidrosAleatorios(TelhasDeVidroMatriz) {
+function ComputadorGerandovidrosAleatorios(vidroMatriz) {
   let Telhas = [];
 
-  for (const set in TelhasDeVidroMatriz) {
-    Telhas.push(getRandom(TelhasDeVidroMatriz[set][0], TelhasDeVidroMatriz[set][1]));
+  for (const set in vidroMatriz) {
+    Telhas.push(getRandom(vidroMatriz[set][0], vidroMatriz[set][1]));
   }
 
   return Telhas;
 }
-// console.log(ComputadorGerandoTelhasDeVidrosAleatorios()); <- que porra eh essa ?
+// console.log(ComputadorGerandovidrosAleatorios()); <- que porra eh essa ?
 
 //quando o jogo começar
-TelhasDeVidro.forEach((Telha) => {
+vidro.forEach((Telha) => {
   Telha.addEventListener("click", () => {
     //checando se o botao iniciajogo foi apertado
     if (!iniciajogo) {
@@ -154,19 +154,19 @@ TelhasDeVidro.forEach((Telha) => {
       alert("Pressione primeiro o botao iniciar!");
     }
 
-    // verificar se o conjunto de TelhasDeVidros anterior foi apagado
+    // verificar se o conjunto de vidros anterior foi apagado
     if (
-      TelhasDeVidroMatriz[i][0] == Telha.dataset.value ||
-      TelhasDeVidroMatriz[i][1] == Telha.dataset.value
+      vidroMatriz[i][0] == Telha.dataset.value ||
+      vidroMatriz[i][1] == Telha.dataset.value
     ) {
       // console.log("Limpo");
 
-      TelhasDeVidroanteriorlimpo = true;
+      vidroanteriorlimpo = true;
 
-      //removendo o ícone do Jogador do TelhasDeVidro anterior
-      if (i != 1) proximoTelhasDeVidro.removeChild(Jogador);
-      // Verificando se é um TelhasDeVidro errado
-      perderTelhasDeVidroaleatoriamente.forEach((lostTelha) => {
+      //removendo o ícone do Jogador do vidro anterior
+      if (i != 1) proximovidro.removeChild(Jogador);
+      // Verificando se é um vidro errado
+      perdervidroaleatoriamente.forEach((lostTelha) => {
         if (Telha.dataset.value == lostTelha) {
           perdervida = true;
 
@@ -177,7 +177,7 @@ TelhasDeVidro.forEach((Telha) => {
     }
     if (Telha.dataset.value) {
       alert("Selecione todas as respostas certas em sequencia!");
-      TelhasDeVidroanteriorlimpo = false;
+      vidroanteriorlimpo = false;
       return;
     }
 
@@ -185,11 +185,11 @@ TelhasDeVidro.forEach((Telha) => {
   });
 });
 
-TelhasDeVidro.forEach((Telha) => {
+vidro.forEach((Telha) => {
   Telha.addEventListener("click", () => {
     //verificando se o botão iniciajogo foi pressionado
     if (!iniciajogo) return;
-    if (!TelhasDeVidroanteriorlimpo) return;
+    if (!vidroanteriorlimpo) return;
     if (perdervida) {
       Comentarios.innerText = "Você perdeu uma vida!";
       Telha.style.backgroundColor = "black";
@@ -208,7 +208,7 @@ TelhasDeVidro.forEach((Telha) => {
       }
       //
     } else {
-      //se o jogador pisa no TelhasDeVidro certo, então i++
+      //se o jogador pisa no vidro certo, então i++
       i++;
       moveJogador(Telha);
       //   console.log("ir em frente");
@@ -218,23 +218,23 @@ TelhasDeVidro.forEach((Telha) => {
   });
 });
 
-// randomizar cada conjunto de TelhasDeVidros
+// randomizar cada conjunto de vidros
 function getRandom(min, max) {
   max++; //uma vez que o valor máximo não está incluído
   return Math.floor(Math.random() * (max - min)) + min;
 }
 // console.log(getAleatorio());
 
-// Jogador se movendo para o próximo conjunto de TelhasDeVidro
+// Jogador se movendo para o próximo conjunto de vidro
 function moveJogador(Telha) {
   Telha.appendChild(Jogador);
-  proximoTelhasDeVidro = Telha;
+  proximovidro = Telha;
 }
 
 // detecta condicao de vitoria de jogo
 PosicaoFinal.addEventListener("click", () => {
   if (i >= 8 && !gameover) {
-    PosicaoFinal.removeChild(AsseguraPosicaoFinal);
+    PosicaoFinal.removeChild(AsseguraPosicao);
     PosicaoFinal.appendChild(Jogador);
     winGame();
   }
@@ -247,13 +247,13 @@ reIniciarBotao.addEventListener("click", () => {
 });
 
 function gameOver() {
-  CorpoDoJogo.classList.add("ocultar");
+  bodydojogo.classList.add("ocultar");
   TelaGameover.classList.remove("ocultar");
   clearintervalo(intervalo);
 }
 
 function winGame() {
-  CorpoDoJogo.classList.add("ocultar");
+  bodydojogo.classList.add("ocultar");
   TextoGameover.innerText = "Você ganhou! Te pegarei na próxima vez ";
   TelaGameover.classList.remove("ocultar");
 }

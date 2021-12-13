@@ -38,7 +38,7 @@
       <!--  -->
 
       <!-- game -body -->
-      <section class="game-body">
+      <section class="bodydojogo">
         <button class="botaoinstrucoes" id="botaoinstrucoes">
           COMO JOGAR
         </button>
@@ -54,12 +54,12 @@
           </div>
 
           <button class="botaoiniciar" id="botaoiniciar">START GAME</button>
-          <h4 id="timer">Tempo : 30 segundos</h4>
+          <h4 id="temporizador">Tempo : 30 segundos</h4>
         </div>
-        <div class="comments" id="comments"></div>
+        <div class="comentarios" id="comentarios"></div>
         <!-- lives count -->
         <div class="lives">
-          <h4 class="lives-count">Vidas restantes : 3</h4>
+          <h4 class="contador-de-vidas">Vidas restantes : 3</h4>
         </div>
         <!-- ends lives count -->
 
@@ -80,27 +80,27 @@
               <img
                 src="./media/icon.png"
                 alt="playericon"
-                class="player-icon"
+                class="iconejogador"
               />
             </span>
           </div>
 
           <!-- glass tiles -->
-          <div class="glass-tiles-container">
-            <div class="glass-tile" id="glass-tile-top" data-value="1"></div>
-            <div class="glass-tile" id="glass-tile-top" data-value="3"></div>
-            <div class="glass-tile" id="glass-tile-top" data-value="5"></div>
-            <div class="glass-tile" id="glass-tile-top" data-value="7"></div>
-            <div class="glass-tile" id="glass-tile-top" data-value="9"></div>
-            <div class="glass-tile" id="glass-tile-top" data-value="11"></div>
-            <div class="glass-tile" id="glass-tile-top" data-value="13"></div>
-            <div class="glass-tile" id="glass-tile-bot" data-value="2"></div>
-            <div class="glass-tile" id="glass-tile-bot" data-value="4"></div>
-            <div class="glass-tile" id="glass-tile-bot" data-value="6"></div>
-            <div class="glass-tile" id="glass-tile-bot" data-value="8"></div>
-            <div class="glass-tile" id="glass-tile-bot" data-value="10"></div>
-            <div class="glass-tile" id="glass-tile-bot" data-value="12"></div>
-            <div class="glass-tile" id="glass-tile-bot" data-value="14"></div>
+          <div class="vidros">
+            <div class="vidro" id="vidro-cima" data-value="1"></div>
+            <div class="vidro" id="vidro-cima" data-value="3"></div>
+            <div class="vidro" id="vidro-cima" data-value="5"></div>
+            <div class="vidro" id="vidro-cima" data-value="7"></div>
+            <div class="vidro" id="vidro-cima" data-value="9"></div>
+            <div class="vidro" id="vidro-cima" data-value="11"></div>
+            <div class="vidro" id="vidro-cima" data-value="13"></div>
+            <div class="vidro" id="vidro-baixo" data-value="2"></div>
+            <div class="vidro" id="vidro-baixo" data-value="4"></div>
+            <div class="vidro" id="vidro-baixo" data-value="6"></div>
+            <div class="vidro" id="vidro-baixo" data-value="8"></div>
+            <div class="vidro" id="vidro-baixo" data-value="10"></div>
+            <div class="vidro" id="vidro-baixo" data-value="12"></div>
+            <div class="vidro" id="vidro-baixo" data-value="14"></div>
           </div>
           <!-- ends glass tiles -->
 
@@ -126,7 +126,7 @@
       <section class="gameover-screen hide">
         <h2 class="gameover-text">Game Over</h2>
 
-        <button id="rebotaoiniciar">Restart</button>
+        <button id="botaoreiniciar">Restart</button>
       </section>
 
       <!--  -->
