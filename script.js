@@ -85,6 +85,12 @@ function togglePlay() { // pausa ou nao a musica
   return musicatema.paused ? musicatema.play() : musicatema.pause();
 }
 
+const perguntas = ['2+2','9*9','7*9','6/3','x^2*4x+9','3x^2-18x+24 = 0','(33+7x)x^2','x^2-(44*3)7',
+'Quantas soluções inteiras a inequação x² + x - 20 ≤ 0 admite?',
+'A soma dos números inteiros x que satisfazem 2x + 1 ≤ x +3 ≤ 4x é',
+'Sejam x e y números tais que os conjuntos {0, 7, 1} e {x, y, 1} são iguais. Então, podemos afirmar que:'];
+const respostas = [];
+
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
 let totaldevidas = 5; // numero total de vidas
