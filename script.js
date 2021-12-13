@@ -73,17 +73,12 @@ const vidro = document.querySelectorAll(".vidro"); // opcoes, os "vidros" da ser
 const PosicaoInicial = document.querySelector(".posicaoinicial"); // posicao inicial
 const PosicaoFinal = document.querySelector(".posicaofinal"); // ultima posicao
 const AsseguraPosicao = document.querySelector(".posicaosegurada"); // <-- segura a ultima posicao registrada
-const TelaGameover = document.querySelector(".displaygameover"); // tela de game over
-const TextoGameover = document.querySelector(".disptextogameover"); // texto de game over
+const telagameover = document.querySelector("displaygameover"); // tela de game over
+const textogameover = document.querySelector("disptextogameover"); // texto de game over
 const botaoreiniciar = document.getElementById("botaoreiniciar"); // botao que reinicia o game
 
 // desliga ou liga a musica
 const musicatema = document.getElementById("musicatema"); // musica tema do squid game?
-
-function togglePlay() { // pausa ou nao a musica
-  musicatema.volume = 0.1;
-  return musicatema.paused ? musicatema.play() : musicatema.pause();
-}
 
 const perguntas = ['2+2',
 '9*9'
@@ -123,7 +118,7 @@ const respostaserradas = ['6','67','83','4','2x^3+5','3','27x^2+5x^3','x^2-726',
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
-let totaldevidas = 10; // numero total de vidas
+let totaldevidas = 6; // numero total de vidas
 let perdervidroaleatoriamente = [];
 let perdervida = false;
 let vidroanteriorlimpo = true;
@@ -132,8 +127,6 @@ let iconejogador;
 let i = 1;
 let gameover = false; // perda total de vidas ocasiona nisso
 let intervalo;
-
-let antiSpam = false;
 
 let displayPerguntas = [];
 
@@ -150,12 +143,12 @@ const vidroArray = {
 
 function perguntasselect() {
   let contador = 0;
-  let perguntatemporario;
-  perguntatemporario = parseInt(Math.random() * 24);
+  var perguntatemporario = 0;
   //console.log(perguntatemporario);
   while (contador < 8) {
-    displayPerguntas[contador] = perguntas[contador + perguntatemporario];
+    displayPerguntas[contador] = perguntas[contador + perguntatemporario]; 
     console.log(displayPerguntas[contador]);
+
     contador++;
   }
   document.getElementById("pergunta").innerHTML = displayPerguntas[0]; 
@@ -163,6 +156,7 @@ function perguntasselect() {
 
 function perguntaAtual(){
   document.getElementById("pergunta").innerHTML = displayPerguntas[i];
+  
 }
 
 
@@ -194,15 +188,18 @@ perdervidroaleatoriamente = geravidrosaleatorios(vidroArray);
 
 //computador gerando números de blocos aleatórios para perder
 function geravidrosaleatorios(vidroArray) {
-  let Telha = [];
-
+  /*let Telha = [];
   for (const set in vidroArray) {
     Telha.push(getRandom(vidroArray[set][0], vidroArray[set][1]));
-  }
 
+  }
+  */
+  Telha = [2,4,5,7,9,12,14];
+  console.log(Telha);
   return Telha;
+  
 }
-// console.log(computadorgerandovidrosaleatorios()); <- pra que esse nome ?
+
 
 // quando o jogo começar
 vidro.forEach((Telha) => {
@@ -262,7 +259,7 @@ vidro.forEach((Telha) => {
       Telha.dataset.value = null;
 
       //checando se o total de vidas é 0
-      if (totaldevidas == 0) {
+      if (totaldevidas <= 0) {
         // console.log("gameover");
         gameOver();
       }
@@ -293,27 +290,25 @@ function moveJogador(Telha) {
 
 // detecta condicao de vitoria de jogo
 PosicaoFinal.addEventListener("click", () => {
-  if (i >= 7 && !gameover) {
+  if (i >= 7) {
+    venceu();
     PosicaoFinal.removeChild(AsseguraPosicao);
     PosicaoFinal.appendChild(Jogador);
-    winGame();
   }
 });
 //
 
-// aciona o reinicio do jogo
-botaoreiniciar.addEventListener("click", () => {
-  window.location = "./";
-});
 
 function gameOver() {
-  bodydojogo.classList.add("ocultar");
-  TelaGameover.classList.remove("ocultar");
+  bodydojogo.classList.add("hide");
+  telagameover.classList.remove("hide");
+  disptextogameover.classList.remove("hide");
   clearInterval(intervalo);
 }
 
-function winGame() {
-  bodydojogo.classList.add("ocultar");
-  TextoGameover.innerText = "Você ganhou! Te pegarei na próxima vez!  Aperte F5 para jogar novamente!";
-  TelaGameover.classList.remove("ocultar");
+function venceu() {
+  bodydojogo.classList.add("hide");
+  textogameover.innerText = "Você ganhou! Parabens!  Aperte F5 para jogar novamente!";
+  telagameover.classList.remove("hide");
+
 }
