@@ -88,7 +88,27 @@ function togglePlay() { // pausa ou nao a musica
 const perguntas = ['2+2','9*9','7*9','6/3','x^2*4x+9','3x^2-18x+24 = 0','(33+7x)x^2','x^2-(44*3)7',
 'Quantas soluções inteiras a inequação x² + x - 20 ≤ 0 admite?',
 'A soma dos números inteiros x que satisfazem 2x + 1 ≤ x +3 ≤ 4x é',
-'Sejam x e y números tais que os conjuntos {0, 7, 1} e {x, y, 1} são iguais. Então, podemos afirmar que:'];
+'Sejam x e y números tais que os conjuntos {0, 7, 1} e {x, y, 1} são iguais. Então, podemos afirmar que:',
+'x – y = 2 e x2 + y2 = 8, então x3 – y3 é igual a:','Se x + y = 13 e x · y = 1, então x2 + y2 é',
+'Se cos 2θ = 7/25 e θ pertence ao primeiro quadrante, então cos θ é igual a:',
+'João recebeu um aumento de 10% e com isso seu salário chegou a R$1.320,00. O salário de João antes do aumento era igual a?',
+'Sendo A o ponto da reta 2x + y − 1 = 0 que equidista dos pontos B = (1,1) e C = (0,−1) , e sendo D = (0,1) , a área do triângulo ACD vale',
+'O número de soluções da equação  , com x > 0, é igual a:',
+'O número de soluções da equação x=√6-x , com x > 0, é igual a:',
+'A soma dos inversos das raízes da equação x² -10x + 22 = 0 é igual a:',
+'A soma de todas as frações da forma n/(n+1), onde n é um elemento do conjunto {1, 2, 3, 4, 5}, é ',
+'Quatro moedas são lançadas simultaneamente. Qual é a probabilidade de ocorrer coroa em uma só moeda?',
+'Jogamos dois dados comuns. Qual a probabilidade de que o total de pontos seja igual a 10?',
+'A probabilidade de um casal com quatro filhos ter dois do sexo masculino e dois do sexo feminino é:',
+'A probabilidade de um dos cem números 1, 2, 3, 4, ..., 100 ser múltiplo de 6 e de 10 ao mesmo tempo é:',
+'Sendo x um arco do segundo quadrante tal que sen x = 3/7 , o valor de tgx é:',
+'A soma de todos os números naturais ímpares de 3 algarismos é:',
+'Quantos termos a soma 5+ 7+ 9+ 11+⋯ deve ter para que o total seja 2700 ?',
+'A média aritmética das raízes da equação modular |2x – 4|  + |x + 1| = 4 é igual a:',
+'Para que o polinômio P(x) = x5 - 2x4 + kx3 - 3x2 + 6 seja divisível pelo binômio -x + 1, o valor de k deve ser igual a:',
+'Considerando-se os algarismos significativos dos números 28,7 e 1,03, podemos afirmar que a soma destes números é dada por:',
+'Seja A uma matriz invertível de ordem 3 tal que a matriz A5+ 2A4 é a matriz nula. O determinante de A é: ',
+'Considere a equação x² + 12x + k = 0. Para qual valor de k esta equação NÃO possui raízes inteiras?'];
 const respostas = [];
 
 let Tempo = 300; // tempo para responder as pergunta
