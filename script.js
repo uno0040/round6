@@ -113,7 +113,7 @@ const respostas = [];
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
-let totaldevidas = 5; // numero total de vidas
+let totaldevidas = 4; // numero total de vidas
 let perdervidroaleatoriamente = [];
 let perdervida = false;
 let vidroanteriorlimpo = true;
@@ -123,8 +123,10 @@ let i = 1;
 let gameover = false; // perda total de vidas ocasiona nisso
 let intervalo;
 
+let displayPerguntas = [];
+
 // CONFIGURANDO OS vidroS
-const vidroMatriz = {
+const vidroArray = {
   1: [1, 2],
   2: [3, 4],
   3: [5, 6],
@@ -134,18 +136,33 @@ const vidroMatriz = {
   7: [13, 14],
 };
 
+function perguntasselect() {
+  let contador = 0;
+  let perguntatemporario;
+  perguntatemporario = parseInt(Math.random() * (24 - 0) + 0);
+  //console.log(perguntatemporario);
+  while (contador < 8) {
+    
+    
+  }
+}
+
+
+
+
 // instrução para notificação do botão
 function instructions() {
   alert(
     "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de vidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no vidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
   );
 }
+
 InstrucaoBotao.addEventListener("click", instructions);
 
 //Controle de botão iniciar 
 iniciobotao.addEventListener("click", () => {
   iniciajogo = true;
-  intervalo = setintervalo(() => {
+  intervalo = setInterval(() => {
     if (Tempo > 0) {
       Tempo--;
       Temporizador.innerText = `Tempo : ${Tempo}sec`;
@@ -157,14 +174,14 @@ iniciobotao.addEventListener("click", () => {
 });
 
 //gerando peças perdidas aleatórias para o jogo
-perdervidroaleatoriamente = ComputadorGerandovidrosAleatorios(vidroMatriz);
+perdervidroaleatoriamente = ComputadorGerandovidrosAleatorios(vidroArray);
 
 //computador gerando números de blocos aleatórios para perder
-function ComputadorGerandovidrosAleatorios(vidroMatriz) {
+function ComputadorGerandovidrosAleatorios(vidroArray) {
   let Telha = [];
 
-  for (const set in vidroMatriz) {
-    Telha.push(getRandom(vidroMatriz[set][0], vidroMatriz[set][1]));
+  for (const set in vidroArray) {
+    Telha.push(getRandom(vidroArray[set][0], vidroArray[set][1]));
   }
 
   return Telha;
@@ -182,8 +199,8 @@ vidro.forEach((Telha) => {
 
     // verificar se o conjunto de vidros anterior foi apagado
     if (
-      vidroMatriz[i][0] == Telha.dataset.value ||
-      vidroMatriz[i][1] == Telha.dataset.value
+      vidroArray[i][0] == Telha.dataset.value ||
+      vidroArray[i][1] == Telha.dataset.value
     ) {
       // console.log("Limpo");
 
@@ -275,7 +292,7 @@ botaoreiniciar.addEventListener("click", () => {
 function gameOver() {
   bodydojogo.classList.add("ocultar");
   TelaGameover.classList.remove("ocultar");
-  clearintervalo(intervalo);
+  clearInterval(intervalo);
 }
 
 function winGame() {
