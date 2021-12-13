@@ -63,7 +63,7 @@ function reiniciaJogo(){ // <- funcao que vai reiniciar o jogo
 
 }*/
 const InstrucaoBotao = document.getElementById("botaoinstrucoes"); // botao de instrucoes
-const IniciarBotao = document.getElementById("botaoiniciar"); // botao que inicia o jogo
+const iniciobotao = document.getElementById("botaoiniciar"); // botao que inicia o jogo
 const Temporizador = document.getElementById("temporizador"); // temporizador
 const Comentarios = document.getElementById("comentarios"); // comentarios no html
 const ContadorDeVidas = document.querySelector(".contador-de-vidas"); // conta vidas
@@ -75,7 +75,7 @@ const PosicaoFinal = document.querySelector(".posicaofinal"); // ultima posicao
 const AsseguraPosicao = document.querySelector(".posicaosegurada"); // <-- segura a ultima posicao registrada
 const TelaGameover = document.querySelector(".displaygameover"); // tela de game over
 const TextoGameover = document.querySelector(".disptextogameover"); // texto de game over
-const reIniciarBotao = document.getElementById("botaoreiniciar"); // botao que reinicia o game
+const botaoreiniciar = document.getElementById("botaoreiniciar"); // botao que reinicia o game
 
 // desliga ou liga a musica
 const musicatema = document.getElementById("musicatema"); // musica tema do squid game?
@@ -87,7 +87,7 @@ function togglePlay() { // pausa ou nao a musica
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
-let totaldevidas = 3; // numero total de vidas
+let totaldevidas = 5; // numero total de vidas
 let perdervidroaleatoriamente = [];
 let perdervida = false;
 let vidroanteriorlimpo = true;
@@ -117,7 +117,7 @@ function instructions() {
 InstrucaoBotao.addEventListener("click", instructions);
 
 //Controle de botão iniciar 
-IniciarBotao.addEventListener("click", () => {
+iniciobotao.addEventListener("click", () => {
   iniciajogo = true;
   intervalo = setintervalo(() => {
     if (Tempo > 0) {
@@ -135,13 +135,13 @@ perdervidroaleatoriamente = ComputadorGerandovidrosAleatorios(vidroMatriz);
 
 //computador gerando números de blocos aleatórios para perder
 function ComputadorGerandovidrosAleatorios(vidroMatriz) {
-  let Telhas = [];
+  let Telha = [];
 
   for (const set in vidroMatriz) {
-    Telhas.push(getRandom(vidroMatriz[set][0], vidroMatriz[set][1]));
+    Telha.push(getRandom(vidroMatriz[set][0], vidroMatriz[set][1]));
   }
 
-  return Telhas;
+  return Telha;
 }
 // console.log(ComputadorGerandovidrosAleatorios()); <- pra que esse nome ?
 
@@ -242,7 +242,7 @@ PosicaoFinal.addEventListener("click", () => {
 //
 
 // aciona o reinicio do jogo
-reIniciarBotao.addEventListener("click", () => {
+botaoreiniciar.addEventListener("click", () => {
   window.location = "./";
 });
 
