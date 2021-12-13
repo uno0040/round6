@@ -85,7 +85,14 @@ function togglePlay() { // pausa ou nao a musica
   return musicatema.paused ? musicatema.play() : musicatema.pause();
 }
 
-const perguntas = ['2+2','9*9','7*9','6/3','x^2*4x+9','3x^2-18x+24 = 0','(33+7x)x^2','x^2-(44*3)7',
+const perguntas = ['2+2',
+'9*9'
+,'7*9'
+,'6/3'
+,'x^2*4x+9'
+,'3x^2-18x+24 = 0'
+,'(33+7x)x^2'
+,'x^2-(44*3)7',
 'Quantas soluções inteiras a inequação x² + x - 20 ≤ 0 admite?',
 'A soma dos números inteiros x que satisfazem 2x + 1 ≤ x +3 ≤ 4x é',
 'Sejam x e y números tais que os conjuntos {0, 7, 1} e {x, y, 1} são iguais. Então, podemos afirmar que:',
@@ -110,6 +117,7 @@ const perguntas = ['2+2','9*9','7*9','6/3','x^2*4x+9','3x^2-18x+24 = 0','(33+7x)
 'Seja A uma matriz invertível de ordem 3 tal que a matriz A5+ 2A4 é a matriz nula. O determinante de A é: ',
 'Considere a equação x² + 12x + k = 0. Para qual valor de k esta equação NÃO possui raízes inteiras?'];
 const respostas = [];
+const respostaserradas = [];
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
@@ -142,9 +150,11 @@ function perguntasselect() {
   perguntatemporario = parseInt(Math.random() * (24 - 0) + 0);
   //console.log(perguntatemporario);
   while (contador < 8) {
-    
-    
+    displayPerguntas[contador] = perguntas[contador + perguntatemporario];
+    //console.log(displayPerguntas[contador]);
+    contador++;
   }
+  displayPerguntas[0]= document.querySelector("pergunta"); 
 }
 
 
@@ -160,7 +170,7 @@ function instructions() {
 InstrucaoBotao.addEventListener("click", instructions);
 
 //Controle de botão iniciar 
-iniciobotao.addEventListener("click", () => {
+iniciobotao.addEventListener("click" ,() => {
   iniciajogo = true;
   intervalo = setInterval(() => {
     if (Tempo > 0) {
@@ -171,13 +181,13 @@ iniciobotao.addEventListener("click", () => {
       }
     }
   }, 1000);
-});
+}, perguntasselect());
 
 //gerando peças perdidas aleatórias para o jogo
-perdervidroaleatoriamente = ComputadorGerandovidrosAleatorios(vidroArray);
+perdervidroaleatoriamente = geravidrosaleatorios(vidroArray);
 
 //computador gerando números de blocos aleatórios para perder
-function ComputadorGerandovidrosAleatorios(vidroArray) {
+function geravidrosaleatorios(vidroArray) {
   let Telha = [];
 
   for (const set in vidroArray) {
@@ -186,7 +196,7 @@ function ComputadorGerandovidrosAleatorios(vidroArray) {
 
   return Telha;
 }
-// console.log(ComputadorGerandovidrosAleatorios()); <- pra que esse nome ?
+// console.log(geravidrosaleatorios()); <- pra que esse nome ?
 
 // quando o jogo começar
 vidro.forEach((Telha) => {
