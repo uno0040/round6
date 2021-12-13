@@ -116,8 +116,10 @@ const perguntas = ['2+2',
 'Considerando-se os algarismos significativos dos números 28,7 e 1,03, podemos afirmar que a soma destes números é dada por:',
 'Seja A uma matriz invertível de ordem 3 tal que a matriz A5+ 2A4 é a matriz nula. O determinante de A é: ',
 'Considere a equação x² + 12x + k = 0. Para qual valor de k esta equação NÃO possui raízes inteiras?'];
-const respostas = [];
-const respostaserradas = [];
+const respostas = ['4','81','63','2','4x^3+9','6','33x^2+7x^3','x^2-924','10','3','X+Y = 7','20','167','4/5','1200 reais','1/2',
+'1','1','5/11','3,55','2/9','1/12','37,5%','3%','-(3 √10)/20','247.500','50','5/3','-2','29,7','-8','34'];
+const respostaserradas = ['6','67','83','4','2x^3+5','3','27x^2+5x^3','x^2-726','7','1','X+Y = 9','10','228','3/6','1500 reais','2','5','0',
+'3/11','2,75','6/11','7/14','26,5%','7%','-(3 √9)/15','375.900','20','9/3','-4','31,6','-13','44'];
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
