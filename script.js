@@ -121,7 +121,7 @@ const respostaserradas = [];
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
-let totaldevidas = 4; // numero total de vidas
+let totaldevidas = 10; // numero total de vidas
 let perdervidroaleatoriamente = [];
 let perdervida = false;
 let vidroanteriorlimpo = true;
@@ -131,9 +131,11 @@ let i = 1;
 let gameover = false; // perda total de vidas ocasiona nisso
 let intervalo;
 
+let antiSpam = false;
+
 let displayPerguntas = [];
 
-// CONFIGURANDO OS vidroS
+// CONFIGURANDO OS VIDROS
 const vidroArray = {
   1: [1, 2],
   2: [3, 4],
@@ -147,17 +149,19 @@ const vidroArray = {
 function perguntasselect() {
   let contador = 0;
   let perguntatemporario;
-  perguntatemporario = parseInt(Math.random() * (24 - 0) + 0);
+  perguntatemporario = parseInt(Math.random() * 24);
   //console.log(perguntatemporario);
   while (contador < 8) {
     displayPerguntas[contador] = perguntas[contador + perguntatemporario];
-    //console.log(displayPerguntas[contador]);
+    console.log(displayPerguntas[contador]);
     contador++;
   }
-  displayPerguntas[0]= document.querySelector("pergunta"); 
+  document.getElementById("pergunta").innerHTML = displayPerguntas[0]; 
 }
 
-
+function perguntaAtual(){
+  document.getElementById("pergunta").innerHTML = displayPerguntas[i];
+}
 
 
 // instrução para notificação do botão
@@ -196,7 +200,7 @@ function geravidrosaleatorios(vidroArray) {
 
   return Telha;
 }
-// console.log(geravidrosaleatorios()); <- pra que esse nome ?
+// console.log(computadorgerandovidrosaleatorios()); <- pra que esse nome ?
 
 // quando o jogo começar
 vidro.forEach((Telha) => {
@@ -225,7 +229,7 @@ vidro.forEach((Telha) => {
 
           // DEBUG console.log("vidas - 1");
         }
-      });
+      }); perguntaAtual();
       return;
     }
     if (Telha.dataset.value) {
@@ -249,6 +253,7 @@ vidro.forEach((Telha) => {
       PosicaoInicial.appendChild(Jogador);
       i = 1;
       totaldevidas--;
+      document.getElementById("pergunta").innerHTML = displayPerguntas[0]; 
       ContadorDeVidas.innerText = `Vidas restantes : ${totaldevidas}`;
 
       perdervida = false; //Resetando o perdervida
@@ -286,7 +291,7 @@ function moveJogador(Telha) {
 
 // detecta condicao de vitoria de jogo
 PosicaoFinal.addEventListener("click", () => {
-  if (i >= 8 && !gameover) {
+  if (i >= 7 && !gameover) {
     PosicaoFinal.removeChild(AsseguraPosicao);
     PosicaoFinal.appendChild(Jogador);
     winGame();
@@ -307,6 +312,6 @@ function gameOver() {
 
 function winGame() {
   bodydojogo.classList.add("ocultar");
-  TextoGameover.innerText = "Você ganhou! Te pegarei na próxima vez ";
+  TextoGameover.innerText = "Você ganhou! Te pegarei na próxima vez!  Aperte F5 para jogar novamente!";
   TelaGameover.classList.remove("ocultar");
 }
