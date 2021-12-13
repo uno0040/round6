@@ -111,7 +111,7 @@ const TelhasDeVidroMatriz = {
 // instrução para notificação do botão
 function instructions() {
   alert(
-    "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de TelhasDeVidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no TelhasDeVidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
+    "Os jogadores terão de cruzar duas pontes paralelas saltando sobre paineis de vidro, para que possam saber onde pular, calculos matematicos serão perguntados ao jogador e a resposta estará no TelhasDeVidro resistente onde o jogador proseguira para proxima fase, caso erre o jogador tem mais 3 vidas."
   );
 }
 InstrucaoBotao.addEventListener("click", instructions);
@@ -151,7 +151,7 @@ TelhasDeVidro.forEach((Telha) => {
     //checando se o botao iniciajogo foi apertado
     if (!iniciajogo) {
       // retorna (Comentarios.innerHTML = "Por favor inicie o botão iniciar!");
-      alert("Please press the start button!");
+      alert("Pressione primeiro o botao iniciar!");
     }
 
     // verificar se o conjunto de TelhasDeVidros anterior foi apagado
@@ -176,7 +176,7 @@ TelhasDeVidro.forEach((Telha) => {
       return;
     }
     if (Telha.dataset.value) {
-      alert("O TelhasDeVidro de trás não foi selecionado, por favor não roube!");
+      alert("Selecione todas as respostas certas em sequencia!");
       TelhasDeVidroanteriorlimpo = false;
       return;
     }
