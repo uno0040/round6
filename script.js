@@ -62,6 +62,7 @@ function fimDeJogo(){ //<- funcao que vai declarar o fim de jogo ao jogador e ch
 function reiniciaJogo(){ // <- funcao que vai reiniciar o jogo
 
 }*/
+
 const InstrucaoBotao = document.getElementById("botaoinstrucoes"); // botao de instrucoes
 const iniciobotao = document.getElementById("botaoiniciar"); // botao que inicia o jogo
 const Temporizador = document.getElementById("temporizador"); // temporizador
@@ -73,9 +74,10 @@ const vidro = document.querySelectorAll(".vidro"); // opcoes, os "vidros" da ser
 const PosicaoInicial = document.querySelector(".posicaoinicial"); // posicao inicial
 const PosicaoFinal = document.querySelector(".posicaofinal"); // ultima posicao
 const AsseguraPosicao = document.querySelector(".posicaosegurada"); // <-- segura a ultima posicao registrada
-const telagameover = document.querySelector("displaygameover"); // tela de game over
-const textogameover = document.querySelector("disptextogameover"); // texto de game over
+const telagameover = document.getElementById("displaygameover"); // tela de game over
+const textogameover = document.getElementById("disptextogameover"); // texto de game over
 const botaoreiniciar = document.getElementById("botaoreiniciar"); // botao que reinicia o game
+const fim = document.getElementById("fim");
 
 // desliga ou liga a musica
 const musicatema = document.getElementById("musicatema"); // musica tema do squid game?
@@ -308,7 +310,11 @@ function gameOver() {
 
 function venceu() {
   bodydojogo.classList.add("hide");
-  textogameover.innerText = "Você ganhou! Parabens!  Aperte F5 para jogar novamente!";
   telagameover.classList.remove("hide");
+  textogameover.classList.remove("hide");
+  textogameover.style.color = "white";
+  textogameover.innerText = "Você ganhou! Parabens!  Aperte F5 para jogar novamente!";
 
 }
+
+fim.addEventListener("click", venceu);

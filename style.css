@@ -5,12 +5,12 @@ body {
 }
 
 .titulo {
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    height: 250px;
-    width: 500px;
-  }
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  height: 250px;
+  width: 500px;
+}
 
 .geral {
   margin: 0;
@@ -217,6 +217,13 @@ img {
   justify-content: center;
   align-items: center;
   font-size: 40px;
+}
+
+.displaygameover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .disptextogameover {
