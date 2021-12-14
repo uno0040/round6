@@ -113,14 +113,16 @@ const perguntas = ['2+2',
 'Considerando-se os algarismos significativos dos números 28,7 e 1,03, podemos afirmar que a soma destes números é dada por:',
 'Seja A uma matriz invertível de ordem 3 tal que a matriz A5+ 2A4 é a matriz nula. O determinante de A é: ',
 'Considere a equação x² + 12x + k = 0. Para qual valor de k esta equação NÃO possui raízes inteiras?'];
+
 const respostas = ['4','81','63','2','4x^3+9','6','33x^2+7x^3','x^2-924','10','3','X+Y = 7','20','167','4/5','1200 reais','1/2',
 '1','1','5/11','3,55','2/9','1/12','37,5%','3%','-(3 √10)/20','247.500','50','5/3','-2','29,7','-8','34'];
+
 const respostaserradas = ['6','67','83','4','2x^3+5','3','27x^2+5x^3','x^2-726','7','1','X+Y = 9','10','228','3/6','1500 reais','2','5','0',
 '3/11','2,75','6/11','7/14','26,5%','7%','-(3 √9)/15','375.900','20','9/3','-4','31,6','-13','44'];
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
-let totaldevidas = 6; // numero total de vidas
+let totaldevidas = 4; // numero total de vidas
 let perdervidroaleatoriamente = [];
 let perdervida = false;
 let vidroanteriorlimpo = true;
@@ -129,6 +131,9 @@ let iconejogador;
 let i = 1;
 let gameover = false; // perda total de vidas ocasiona nisso
 let intervalo;
+let perguntatemporario;
+let aleatoriorespostas;
+let Telha = [];
 
 let displayPerguntas = [];
 
@@ -145,11 +150,12 @@ const vidroArray = {
 
 function perguntasselect() {
   let contador = 0;
-  var perguntatemporario = 0;
+  
+  perguntatemporario = parseInt(Math.random() * (24 - 0) + 0);
   //console.log(perguntatemporario);
   while (contador < 8) {
     displayPerguntas[contador] = perguntas[contador + perguntatemporario]; 
-    console.log(displayPerguntas[contador]);
+    //console.log(displayPerguntas[contador]);
 
     contador++;
   }
@@ -174,9 +180,11 @@ InstrucaoBotao.addEventListener("click", instructions);
 //Controle de botão iniciar 
 iniciobotao.addEventListener("click" ,() => {
   iniciajogo = true;
+  atualizaRepostas();
+  let diminuidor = 1; 
   intervalo = setInterval(() => {
     if (Tempo > 0) {
-      Tempo--;
+      Tempo = Tempo - diminuidor;
       Temporizador.innerText = `Tempo : ${Tempo}sec`;
       if (Tempo == 0) {
         gameOver();
@@ -190,26 +198,81 @@ perdervidroaleatoriamente = geravidrosaleatorios(vidroArray);
 
 //computador gerando números de blocos aleatórios para perder
 function geravidrosaleatorios(vidroArray) {
-  /*let Telha = [];
+  
   for (const set in vidroArray) {
     Telha.push(getRandom(vidroArray[set][0], vidroArray[set][1]));
 
-  }
-  */
-  Telha = [2,4,5,7,9,12,14];
+  } 
   console.log(Telha);
   return Telha;
   
 }
+function atualizaRepostas() {
 
+  if (Telha[0] == 1) {
+  document.getElementById("vidro-cima").innerHTML = respostaserradas[perguntatemporario];
+  document.getElementById("vidro-baixo").innerHTML = respostas[perguntatemporario];
+  } else if (Telha[0] == 2){  
+  document.getElementById("vidro-cima").innerHTML = respostas[perguntatemporario];
+  document.getElementById("vidro-baixo").innerHTML = respostaserradas[perguntatemporario];
+  }
+
+  if (Telha[1] == 3) {
+    document.getElementById("vidro-cima1").innerHTML = respostaserradas[perguntatemporario + 1];
+    document.getElementById("vidro-baixo1").innerHTML = respostas[perguntatemporario + 1];
+  } else if (Telha[1] == 4){
+    document.getElementById("vidro-cima1").innerHTML = respostas[perguntatemporario + 1];
+    document.getElementById("vidro-baixo1").innerHTML = respostaserradas[perguntatemporario + 1]; 
+  }
+
+  if (Telha[2] == 5) {
+    document.getElementById("vidro-cima2").innerHTML = respostaserradas[perguntatemporario + 2];
+    document.getElementById("vidro-baixo2").innerHTML = respostas[perguntatemporario + 2];
+  } else if (Telha[2] == 6){
+    document.getElementById("vidro-cima2").innerHTML = respostas[perguntatemporario + 2];
+    document.getElementById("vidro-baixo2").innerHTML = respostaserradas[perguntatemporario + 2]; 
+  }
+
+  if (Telha[3] == 7) {
+    document.getElementById("vidro-cima3").innerHTML = respostaserradas[perguntatemporario + 3];
+    document.getElementById("vidro-baixo3").innerHTML = respostas[perguntatemporario + 3];
+  } else if (Telha[3] == 8){
+    document.getElementById("vidro-cima3").innerHTML = respostas[perguntatemporario + 3];
+    document.getElementById("vidro-baixo3").innerHTML = respostaserradas[perguntatemporario + 3]; 
+  }
+
+  if (Telha[4] == 9) {
+    document.getElementById("vidro-cima4").innerHTML = respostaserradas[perguntatemporario + 4];
+    document.getElementById("vidro-baixo4").innerHTML = respostas[perguntatemporario + 4];
+  } else if (Telha[4] == 10){
+    document.getElementById("vidro-cima4").innerHTML = respostas[perguntatemporario + 4];
+    document.getElementById("vidro-baixo4").innerHTML = respostaserradas[perguntatemporario + 4]; 
+  }
+
+  if (Telha[5] == 11) {
+    document.getElementById("vidro-cima5").innerHTML = respostaserradas[perguntatemporario + 5];
+    document.getElementById("vidro-baixo5").innerHTML = respostas[perguntatemporario + 5];
+  } else if (Telha[5] == 12){
+    document.getElementById("vidro-cima5").innerHTML = respostas[perguntatemporario + 5];
+    document.getElementById("vidro-baixo5").innerHTML = respostaserradas[perguntatemporario + 5]; 
+  }
+
+  if (Telha[6] == 13) {
+    document.getElementById("vidro-cima6").innerHTML = respostaserradas[perguntatemporario + 6];
+    document.getElementById("vidro-baixo6").innerHTML = respostas[perguntatemporario + 6];
+  } else if (Telha[6] == 14){
+    document.getElementById("vidro-cima6").innerHTML = respostas[perguntatemporario + 6];
+    document.getElementById("vidro-baixo6").innerHTML = respostaserradas[perguntatemporario + 6]; 
+  }
+}
 
 // quando o jogo começar
 vidro.forEach((Telha) => {
   Telha.addEventListener("click", () => {
     // checando se o botao iniciajogo foi apertado
     if (!iniciajogo) {
-      // retorna (Comentarios.innerHTML = "Por favor inicie o botão iniciar!");
       alert("Pressione primeiro o botao iniciar!");
+      return;
     }
 
     // verificar se o conjunto de vidros anterior foi apagado
@@ -248,6 +311,9 @@ vidro.forEach((Telha) => {
     //verificando se o botão iniciajogo foi pressionado
     if (!iniciajogo) return;
     if (!vidroanteriorlimpo) return;
+    /*if (i > 8) {
+      venceu();
+    }*/
     if (perdervida) {
       Comentarios.innerText = "Você perdeu uma vida!";
       Telha.style.backgroundColor = "black";
@@ -269,6 +335,7 @@ vidro.forEach((Telha) => {
     } else {
       //se o jogador pisa no vidro certo, então i++
       i++;
+      console.log("O I ta igual a " + i);
       moveJogador(Telha);
       //   console.log("ir em frente");
       Comentarios.innerText = "Siga em frente!";
@@ -291,12 +358,10 @@ function moveJogador(Telha) {
 }
 
 // detecta condicao de vitoria de jogo
-PosicaoFinal.addEventListener("click", () => {
+fim.addEventListener("click", () => {
   if (i >= 7) {
     venceu();
-    PosicaoFinal.removeChild(AsseguraPosicao);
-    PosicaoFinal.appendChild(Jogador);
-  }
+  } else { return; }
 });
 //
 
@@ -314,7 +379,4 @@ function venceu() {
   textogameover.classList.remove("hide");
   textogameover.style.color = "white";
   textogameover.innerText = "Você ganhou! Parabens!  Aperte F5 para jogar novamente!";
-
 }
-
-fim.addEventListener("click", venceu);

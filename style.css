@@ -122,8 +122,55 @@ img {
   align-self: flex-end;
   margin-bottom: 2.5px;
 }
-
+#vidro-cima1 {
+  align-self: flex-end;
+  margin-bottom: 2.5px;
+}
+#vidro-cima2 {
+  align-self: flex-end;
+  margin-bottom: 2.5px;
+}
+#vidro-cima3 {
+  align-self: flex-end;
+  margin-bottom: 2.5px;
+}
+#vidro-cima4 {
+  align-self: flex-end;
+  margin-bottom: 2.5px;
+}
+#vidro-cima5 {
+  align-self: flex-end;
+  margin-bottom: 2.5px;
+}
+#vidro-cima6 {
+  align-self: flex-end;
+  margin-bottom: 2.5px;
+}
 #vidro-baixo {
+  align-self: flex-inicio;
+  margin-top: 2.5px;
+}
+#vidro-baixo1 {
+  align-self: flex-inicio;
+  margin-top: 2.5px;
+}
+#vidro-baixo2 {
+  align-self: flex-inicio;
+  margin-top: 2.5px;
+}
+#vidro-baixo3 {
+  align-self: flex-inicio;
+  margin-top: 2.5px;
+}
+#vidro-baixo4 {
+  align-self: flex-inicio;
+  margin-top: 2.5px;
+}
+#vidro-baixo5 {
+  align-self: flex-inicio;
+  margin-top: 2.5px;
+}
+#vidro-baixo6 {
   align-self: flex-inicio;
   margin-top: 2.5px;
 }
