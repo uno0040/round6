@@ -120,7 +120,7 @@ const respostaserradas = ['6','67','83','4','2x^3+5','3','27x^2+5x^3','x^2-726',
 
 let Tempo = 300; // tempo para responder as pergunta
 let iniciajogo = false;
-let totaldevidas = 6; // numero total de vidas
+let totaldevidas = 4; // numero total de vidas
 let perdervidroaleatoriamente = [];
 let perdervida = false;
 let vidroanteriorlimpo = true;
